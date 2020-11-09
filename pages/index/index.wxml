@@ -1,9 +1,10 @@
 <view>
+  <SearchInput></SearchInput>
   首页
   <text class="iconfont icon-shoucang1" selectable="false" space="false" decode="false">
     
   </text>
-    
+  
     
     
     
