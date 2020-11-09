@@ -2,13 +2,13 @@
   "pages":[
     "pages/index/index",
     "pages/category/category", 
+    "pages/cart/cart",
+    "pages/user/user",
     "pages/goods_list/goods_list",
     "pages/goods_detail/goods_detail", 
-    "pages/cart/cart",
     "pages/collect/collect",
     "pages/order/order",
     "pages/search/search",
-    "pages/user/user",
     "pages/feedback/feedback",
     "pages/login/login",
     "pages/auth/auth",
@@ -19,6 +19,41 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "商超优购",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#ff2d4a",
+    "backgroundColor": "#fafafa",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/document/images/icons/home.png",
+        "selectedIconPath": "static/document/images/icons/home-o.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "static/document/images/icons/category.png",
+        "selectedIconPath": "static/document/images/icons/category-o.png"
+      }
+      ,
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "static/document/images/icons/cart.png",
+        "selectedIconPath": "static/document/images/icons/cart-o.png"
+      }
+      ,
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "static/document/images/icons/my.png",
+        "selectedIconPath": "static/document/images/icons/my-o.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
