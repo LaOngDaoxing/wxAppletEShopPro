@@ -1,4 +1,4 @@
-//Page Object
+//重新初始化index.js：先清空index.js》再输入wx-page》选择下拉框提示的wx-page
 Page({
   data: {
     
