@@ -1,6 +1,6 @@
 // 同时发送异步代码的次数
 let ajaxTimes=0;
-export const request=(params)=>{
+export const promiseRequestVar=(params)=>{
   // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
   let header={...params.header};
   if(params.url.includes("/my/")){

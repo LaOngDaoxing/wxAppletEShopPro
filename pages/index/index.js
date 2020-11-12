@@ -1,6 +1,6 @@
 //重新初始化index.js：先清空index.js》再输入wx-page》选择下拉框提示的wx-page
 // 0 引入 用来发送请求的 方法 一定要把路径补全
-import { request } from "../../backEndInterface/promiseRequest.js";
+import { promiseRequestVar } from "../../request/promiseRequest.js";
 Page({
   data: {
     // 轮播图数组
@@ -62,7 +62,7 @@ Page({
    * @Description：二、使用请求Promise(wx.request({});)调用后台接口，获取轮播图数据 
    */
   getSwiperList(){
-    request({ url: "/slideshowData" })
+    promiseRequestVar({ url: "/slideshowData" })
     .then(result => {
       this.setData({
         swiperList: result
@@ -71,7 +71,7 @@ Page({
   },
   // 获取 分类导航数据
   getCateList(){
-    request({ url: "/home/catitems" })
+    promiseRequestVar({ url: "/home/catitems" })
     .then(result => {
       this.setData({
         catesList: result
@@ -80,7 +80,7 @@ Page({
   },
   // 获取 楼层数据
   getFloorList(){
-    request({ url: "/home/floordata" })
+    promiseRequestVar({ url: "/home/floordata" })
     .then(result => {
       this.setData({
         floorList: result
