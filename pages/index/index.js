@@ -14,10 +14,32 @@ Page({
   onLoad: function (options) {
     // 1 发送异步请求获取轮播图数据  优化的手段可以通过es6的 promise来解决这个问题 
     wx.request({
-      url: 'https://laongdaoxing.com/NewEmployeesLearnNotes/dataDeal/user/userList_MapList',
+      /**
+      * @OptSteps
+        linux服务器》配置nginx.conf》
+          http{
+            server{
+              # 访问项目外资源
+              # 浏览器链接路径https://laongdaoxing.com/file/saveFile/wxPic002.jpg    				
+              location / {
+                root   /data/website/wxAppletMiniTestPro/static/document;
+                index  index.html index.htm;     
+              } 
+              或
+              location /file/saveFile {
+                root   /data/website/wxAppletMiniTestPro/static/document;
+                index  index.html index.htm;     
+              }		  							
+            }
+          }
+      * @远程服务器后台接口返回数据
+        {"slideshowList":[{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1002","goods_id":1002,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic002.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1003","goods_id":1003,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic003.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1004","goods_id":1004,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic004.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1005","goods_id":1005,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic005.jpg"}],"rstMap":{"rstCode":200,"rstMsg":"获取成功"}}
+       */
+      url: 'https://laongdaoxing.com/NewEmployeesLearnNotes/wxAppletEShop/slideshowData',
       success: (result) => {
+        console.log(result);
         this.setData({
-          swiperList: result.data.username
+          swiperList: result.data.slideshowList
         })
       }
     });
