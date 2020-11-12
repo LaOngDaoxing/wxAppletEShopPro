@@ -59,7 +59,7 @@ Page({
     });
   },
   /**
-   * @Description：二、使用请求Promise(wx.request({});)调用后台接口，获取轮播图数据 
+   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})调用后台接口，获取轮播图数据 
    */
   getSwiperList(){
     promiseRequestVar({ url: "/slideshowData" })
