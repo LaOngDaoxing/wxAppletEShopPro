@@ -13,9 +13,9 @@ Page({
   // 页面开始加载 就会触发
   onLoad: function (options) {
     // 一、使用原生请求wx.request({});调用后台接口，获取轮播图数据
-    // this.useMulitWxRequestInOneFunMayBug();
-    // 二、使用请求Promise(wx.request({});)调用后台接口，获取轮播图数据 
-    this.getSwiperList();
+    // this.useMulitWxRequestInOneFunMayBugToGetSwiperList();
+    // 二、使用请求Promise((resolve,reject)=>{wx.request({});})调用后台接口，获取轮播图数据 
+    this.usePromiseWxRequestToGetSwiperList();
     // this.getCateList();
     // this.getFloorList();
       
@@ -25,7 +25,7 @@ Page({
   * @Bug
       注意，套娃使用原生请求wx.request({});可能会出现异步回调地狱。
    */
-  useMulitWxRequestInOneFunMayBug(){
+  useMulitWxRequestInOneFunMayBugToGetSwiperList(){
     // 1 发送异步请求获取轮播图数据  优化的手段可以通过es6的 promise来解决这个问题 
     wx.request({
       /**
@@ -61,7 +61,7 @@ Page({
   /**
    * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})调用后台接口，获取轮播图数据 
    */
-  getSwiperList(){
+  usePromiseWxRequestToGetSwiperList(){
     promiseRequestVar({ url: "/slideshowData" })
     .then(result => {
       this.setData({
