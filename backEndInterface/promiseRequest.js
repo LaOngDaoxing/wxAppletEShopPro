@@ -1,4 +1,3 @@
-
 // 同时发送异步代码的次数
 let ajaxTimes=0;
 export const request=(params)=>{
@@ -18,15 +17,15 @@ export const request=(params)=>{
   });
     
 
-  // 定义公共的url
-  const baseUrl="https://api.zbztb.cn/api/public/v1";
+  // 定义公共的后台接口请求url
+  const baseUrl="https://laongdaoxing.com/NewEmployeesLearnNotes/wxAppletEShop";
   return new Promise((resolve,reject)=>{
     wx.request({
      ...params,
      header:header,
      url:baseUrl+params.url,
      success:(result)=>{
-       resolve(result.data.message);
+       resolve(result.data.slideshowList);
      },
      fail:(err)=>{
        reject(err);
