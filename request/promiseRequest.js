@@ -25,7 +25,7 @@ export const promiseRequestVar=(params)=>{
      header:header,
      url:baseUrl+params.url,
      success:(result)=>{
-       resolve(result.data.slideshowList);
+       resolve(result.data.infoList);
      },
      fail:(err)=>{
        reject(err);

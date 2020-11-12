@@ -18,7 +18,7 @@
           widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化 
      -->
     <swiper autoplay indicator-dots circular>
-      <swiper-item wx:for="{{carouselList}}" wx:key="goods_id">
+      <swiper-item wx:for="{{slideshowList}}" wx:key="goods_id">
         <navigator url="{{item.navigator_url}}">
           <image mode="widthFix" src="{{item.image_src}}"></image>
         </navigator>

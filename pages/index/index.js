@@ -4,9 +4,9 @@ import { promiseRequestVar } from "../../request/promiseRequest.js";
 Page({
   data: {
     // 轮播图数组
-    carouselList: [],
-    // 导航 数组
-    navsList:[],
+    slideshowList: [],
+    // 分类导航 数组
+    classifyNavList:[],
     // 楼层数据
     floorList:[]
   },
@@ -47,13 +47,13 @@ Page({
             }
           }
       * @远程服务器后台接口返回数据
-        {"slideshowList":[{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1002","goods_id":1002,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic002.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1003","goods_id":1003,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic003.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1004","goods_id":1004,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic004.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1005","goods_id":1005,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic005.jpg"}],"rstMap":{"rstCode":200,"rstMsg":"获取成功"}}
+        {"infoList":[{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1002","goods_id":1002,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic002.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1003","goods_id":1003,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic003.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1004","goods_id":1004,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic004.jpg"},{"open_type":"navigate","navigator_url":"/pages/goods_detail/goods_detail?goods_id=1005","goods_id":1005,"image_src":"https://laongdaoxing.com/file/saveFile/wxPic005.jpg"}],"rstMap":{"rstCode":200,"rstMsg":"获取成功"}}
        */
       url: 'https://laongdaoxing.com/NewEmployeesLearnNotes/wxAppletEShop/slideshowData',
       success: (result) => {
         console.log(result);
         this.setData({
-          carouselList: result.data.slideshowList
+          slideshowList: result.data.infoList
         })
       }
     });
@@ -65,16 +65,16 @@ Page({
     promiseRequestVar({ url: "/slideshowData" })
     .then(result => {
       this.setData({
-        carouselList: result
+        slideshowList: result
       })
     })
   },
   // 获取 分类导航数据
-  getNavigationsList(){
+  getNavigationList(){
     promiseRequestVar({ url: "/home/catitems" })
     .then(result => {
       this.setData({
-        navsList: result
+        classifyNavList: result
       })
     })
   },
