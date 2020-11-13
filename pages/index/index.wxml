@@ -1,8 +1,8 @@
 <view>
-  <!--搜索框 开始-->
+  <!-- 一、搜索框 开始-->
   <SearchInput></SearchInput>
-  <!--搜索框 结束-->
-  <!-- 轮播图 开始 -->
+  <!-- 一、搜索框 结束-->
+  <!-- 二、轮播图 开始 -->
   <view class="index_swiper">
     <!-- 
       1 swiper标签存在默认的宽度和高度
@@ -25,17 +25,17 @@
       </swiper-item>
     </swiper>
   </view>
-  <!-- 轮播图 结束 -->
+  <!-- 二、轮播图 结束 -->
 
-  <!-- 分类导航 开始 -->
+  <!-- 三、分类导航 开始 -->
   <view class="index_cate">
     <navigator wx:for="{{classifyNavList}}" wx:key="name" url="/pages/category/category" open-type="switchTab">
     <image mode="widthFix" src="{{item.image_src}}" ></image>
   </navigator>
   </view>
-  <!-- 分类导航 结束 -->
+  <!-- 三、分类导航 结束 -->
 
-  <!-- 楼层 开始 -->
+  <!-- 四、楼层 开始 -->
   <view class="index_floor">
     <view class="floor_group" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="floor_title">
       <!-- 标题 -->
@@ -50,6 +50,5 @@
       </view>
     </view>
   </view>
-  <!-- 楼层 结束 -->
+  <!-- 四、楼层 结束 -->
 </view>
-  
