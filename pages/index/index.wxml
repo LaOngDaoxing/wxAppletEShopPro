@@ -27,6 +27,13 @@
   </view>
   <!-- 轮播图 结束 -->
   
+  <!-- 分类导航 开始 -->
+  <view class="index_cate">
+    <navigator wx:for="{{classifyNavList}}" wx:key="name" url="/pages/category/category" open-type="switchTab">
+    <image mode="widthFix" src="{{item.image_src}}" ></image>
+  </navigator>
+  </view>
+  <!-- 分类导航 结束 -->
     
     
     

@@ -14,9 +14,10 @@ Page({
   onLoad: function (options) {
     // 一、使用原生请求wx.request({});调用后台接口，获取轮播图数据
     // this.useMulitWxRequestInOneFunMayBugToGetSlideshowList();
-    // 二、使用请求Promise((resolve,reject)=>{wx.request({});})调用后台接口，获取轮播图数据 
+    // 二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
     this.usePromiseWxRequestToGetSlideshowList();
-    // this.getCateList();
+    // 三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
+    this.getClassifyNavigationList();
     // this.getFloorList();
       
   },
@@ -59,7 +60,7 @@ Page({
     });
   },
   /**
-   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})调用后台接口，获取轮播图数据 
+   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
    */
   usePromiseWxRequestToGetSlideshowList(){
     promiseRequestVar({ url: "/slideshowData" })
@@ -69,9 +70,11 @@ Page({
       })
     })
   },
-  // 获取 分类导航数据
-  getNavigationList(){
-    promiseRequestVar({ url: "/home/catitems" })
+  /**
+   * @Description：三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
+   */
+  getClassifyNavigationList(){
+    promiseRequestVar({ url: "/classifyNavData" })
     .then(result => {
       this.setData({
         classifyNavList: result

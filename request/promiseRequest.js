@@ -17,6 +17,10 @@ export const promiseRequestVar=(params)=>{
   });
     
 
+  
+  /**
+   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取数据 
+   */
   // 定义公共的后台接口请求url
   const baseUrl="https://laongdaoxing.com/NewEmployeesLearnNotes/wxAppletEShop";
   return new Promise((resolve,reject)=>{
