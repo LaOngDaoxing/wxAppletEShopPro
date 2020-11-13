@@ -17,7 +17,7 @@ Page({
     // 二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
     this.usePromiseWxRequestToGetSlideshowList();
     // 三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
-    this.getClassifyNavigationList();
+    this.usePromiseWxRequestToGetClassifyNavList();
     // this.getFloorList();
       
   },
@@ -73,7 +73,7 @@ Page({
   /**
    * @Description：三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
    */
-  getClassifyNavigationList(){
+  usePromiseWxRequestToGetClassifyNavList(){
     promiseRequestVar({ url: "/classifyNavData" })
     .then(result => {
       this.setData({
