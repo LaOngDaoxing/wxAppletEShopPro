@@ -5,13 +5,14 @@ page {
   height: 100%;
 }
 .cates .cates_container {
-  /* less中使用calc的时候要注意 */
+  /* less中calc的时候要注意使用 ~'' ，例如~'calc(手机视口高度-手机头部搜索框高度)'。vh手机视口高度单位、vw手机视口宽度单位。 */
   height: calc( 100vh - 90rpx );
   display: flex;
 }
 .cates .cates_container .left_menu {
   /* 子项 高度 100% flex */
   flex: 2;
+  /*------ 左侧菜单 ------*/
 }
 .cates .cates_container .left_menu .menu_item {
   height: 80rpx;

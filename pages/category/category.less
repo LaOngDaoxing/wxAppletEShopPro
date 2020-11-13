@@ -3,14 +3,17 @@ page{
   }
   .cates{
     height: 100%;
+    /*--------------------------- 二、可滚动视图区域 开始——微信官方文档•小程序》组件》视图容器》scroll-view》 ---------------------------*/
     .cates_container{
-      /* less中使用calc的时候要注意 */
+      /* less中calc的时候要注意使用 ~'' ，例如~'calc(手机视口高度-手机头部搜索框高度)'。vh手机视口高度单位、vw手机视口宽度单位。 */
       height: ~'calc( 100vh - 90rpx )';
+      // 设置为flex布局
       display: flex;
+      /*------ 左侧菜单 ------*/
       .left_menu{
         /* 子项 高度 100% flex */
         flex: 2;
-       
+        
         .menu_item{
           height: 80rpx;
           display: flex;
@@ -23,6 +26,7 @@ page{
           border-left: 5rpx solid currentColor;
         }
       }
+      /*------ 右侧商品内容 ------*/
       .right_content{
          /* 子项 高度 100% flex */
         flex: 5;
