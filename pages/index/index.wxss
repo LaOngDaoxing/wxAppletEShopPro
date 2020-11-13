@@ -1,5 +1,6 @@
 /*------------------- **.wxss格式代码 开始 -------------------*/
 /*------------------- **.less格式代码 开始 -------------------*/
+/*------ 二、轮播图 ------*/
 .index_swiper swiper {
   width: 750rpx;
   height: 340rpx;
@@ -7,6 +8,7 @@
 .index_swiper swiper image {
   width: 100%;
 }
+/*------ 三、分类导航 ------*/
 .index_cate {
   display: flex;
 }
@@ -17,6 +19,7 @@
 .index_cate navigator image {
   width: 100%;
 }
+/*------ 四、楼层 ------*/
 .index_floor .floor_group .floor_title {
   padding: 10rpx 0;
 }
@@ -29,11 +32,13 @@
 .index_floor .floor_group .floor_list navigator {
   float: left;
   width: 33.33%;
-  /* 后四个超链接 */
-  /* 2 3 两个超链接 */
+  /* 
+          内容的后四个超链接图片： 
+          计算过程：已知原图的宽高 232 *386，公式 232 / 386 = 33.33vw / height，因此第四.1张图片的高度 height:33.33vw * 386 /  232。最终第四.1张图片的高度是第一张的1/2。
+        */
+  /* 2 3 两个超链接，下边框 */
 }
 .index_floor .floor_group .floor_list navigator:nth-last-child(-n+4) {
-  /* 原图的宽高 232 *386 */
   height: 27.72711207vw;
   border-left: 10rpx solid #fff;
 }
