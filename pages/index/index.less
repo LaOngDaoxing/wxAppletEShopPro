@@ -31,30 +31,32 @@
 /*------ 四、楼层 ------*/
 .index_floor{
   .floor_group{
+    // 标题
     .floor_title{
       padding: 10rpx 0;
       image{
         width: 100%;
       }
     }
+    // 内容
     .floor_list{
       // 清除浮动
       overflow: hidden;
       navigator{
+        // 内容的第一张超链接图片：左浮动、占位整屏宽度的1/3
         float: left;
         width: 33.33%;
-
-      /* 后四个超链接 */
-      &:nth-last-child(-n+4){
-      /* 原图的宽高 232 *386 */
-      // 232 / 386 = 33.33vw / height
-      // 第一张图片的高度 height:33.33vw * 386 /  232
-      height:33.33vw * 386 /  232 /2 ;
-
-      border-left: 10rpx solid #fff;
+        /* 
+          内容的后四个超链接图片： 
+          计算过程：已知原图的宽高 232 *386，公式 232 / 386 = 33.33vw / height，因此第四.1张图片的高度 height:33.33vw * 386 /  232。最终第四.1张图片的高度是第一张的1/2。
+        */
+        &:nth-last-child(-n+4){
+        height:33.33vw * 386 /  232 /2 ;
+        // 做边框
+        border-left: 10rpx solid #fff;
       }
 
-      /* 2 3 两个超链接 */
+      /* 2 3 两个超链接，下边框 */
       &:nth-child(2),
       &:nth-child(3){
         border-bottom: 10rpx solid #fff;
