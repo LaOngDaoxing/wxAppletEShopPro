@@ -3,7 +3,9 @@ let ajaxTimes=0;
 export const promiseRequestVar=(params)=>{
   // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
   let header={...params.header};
+  console.log("---sssssss1");
   if(params.url.includes("/my/")){
+    console.log("---hhhhhh2");
     // 拼接header 带上token
     header["Authorization"]=wx.getStorageSync("token");
   }

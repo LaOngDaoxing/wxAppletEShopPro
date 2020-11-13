@@ -12,17 +12,18 @@ Page({
   },
   // 页面开始加载 就会触发
   onLoad: function (options) {
-    // 一、使用原生请求wx.request({});调用后台接口，获取轮播图数据
+    // 一_方式1、使用原生请求wx.request({});调用后台接口，获取轮播图数据
     // this.useMulitWxRequestInOneFunMayBugToGetSlideshowList();
-    // 二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
+    // 一_方式2、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
     this.usePromiseWxRequestToGetSlideshowList();
-    // 三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
+    // 二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
     this.usePromiseWxRequestToGetClassifyNavList();
-    // this.getFloorList();
+    // 三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取楼层数据
+    this.usePromiseWxRequestToGetFloorList();
       
   },
   /**
-  * @Description：一、使用原生请求wx.request({});调用后台接口，获取轮播图数据 
+  * @Description：一_方式1、使用原生请求wx.request({});调用后台接口，获取轮播图数据 
   * @Bug
       注意，套娃使用原生请求wx.request({});可能会出现异步回调地狱。
    */
@@ -60,31 +61,36 @@ Page({
     });
   },
   /**
-   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
+   * @Description：一_方式2、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取轮播图数据 
    */
   usePromiseWxRequestToGetSlideshowList(){
     promiseRequestVar({ url: "/slideshowData" })
     .then(result => {
+      // console.log(result);
       this.setData({
         slideshowList: result
       })
     })
   },
   /**
-   * @Description：三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
+   * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取分类导航数据
    */
   usePromiseWxRequestToGetClassifyNavList(){
     promiseRequestVar({ url: "/classifyNavData" })
     .then(result => {
+      // console.log(result);
       this.setData({
         classifyNavList: result
       })
     })
   },
-  // 获取 楼层数据
-  getFloorList(){
-    promiseRequestVar({ url: "/home/floordata" })
+  /**
+   * @Description：三、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取楼层数据
+   */
+  usePromiseWxRequestToGetFloorList(){
+    promiseRequestVar({ url: "/floorData" })
     .then(result => {
+      console.log(result);
       this.setData({
         floorList: result
       })
