@@ -2,6 +2,7 @@ page{
     padding-bottom: 90rpx;
   }
   .detail_swiper{
+    /*--------------------------- 一、轮播图 ---------------------------*/
     swiper{
       /* 
       * @Description：设置轮播图框高度=图片高度65%
@@ -16,6 +17,7 @@ page{
       }
     }
   }
+  /*--------------------------- 二、商品价格 ---------------------------*/
   .goods_price{
     padding: 15rpx;
     font-size: 32rpx;
@@ -27,6 +29,7 @@ page{
     border-bottom: 5rpx solid #dedede;
     padding: 10rpx 0;
     display: flex;
+    /*--------------------------- 三_1、商品名称 ---------------------------*/
     .goods_name{
       flex: 5;
       color: #000;
@@ -38,6 +41,7 @@ page{
       -webkit-box-orient: vertical;
       -webkit-line-clamp:2;
     }
+    /*--------------------------- 三_2、商品收藏 ---------------------------*/
     .goods_collect{
       flex: 1;
       display: flex;
@@ -52,7 +56,7 @@ page{
       .collect_text{}
     }
   }
-  
+  /*--------------------------- 四、图文详情 ---------------------------*/
   .goods_info{
     .goods_info_title{
       font-size: 32rpx;
@@ -89,6 +93,7 @@ page{
         opacity: 0;
       }
     }
+    /*--------------------------- 五_4、加入购物车 ---------------------------*/
     .btn_cart{
       flex: 2;
       display: flex;
@@ -100,6 +105,7 @@ page{
       font-size: 30rpx;
       font-weight: 600;
     }
+    /*--------------------------- 五_5、立即购买 ---------------------------*/
     .btn_buy{
       flex: 2;
       display: flex;
