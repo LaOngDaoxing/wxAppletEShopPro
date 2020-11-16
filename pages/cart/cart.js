@@ -1,18 +1,20 @@
 /* 
 1 获取用户的收货地址
-  1 **.wxml绑定点击事件
-  2 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
+  （1） **.wxml绑定点击事件
+  （2） 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
 
-  2 正确流程：获取 用户 对小程序 所授予 获取地址的  权限 状态 scope，并分情况处理
-    情景1： 假设 用户 点击获取收货地址的提示框 确定  authSetting scope.address 
-        scope 值 true，可以直接调用 获取收货地址
-    情景2： 假设 用户 从来没有调用过 收货地址的api 
-        scope undefined，可以直接调用 获取收货地址
-    情景3： 假设 用户 点击获取收货地址的提示框 取消   
-        scope 值 false 
-          1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-          2 获取收货地址
-    4 把获取到的收货地址 存入到 本地存储中 
+  （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+      I、获取用户对小程序所授予的“获取地址的权限状态scope”
+      II、判断 权限状态scope
+        情景1： 假设 用户 点击获取收货地址的提示框 确定  authSetting scope.address 
+            scope 值 true，可以直接调用 获取收货地址
+        情景2： 假设 用户 从来没有调用过 收货地址的api 
+            scope undefined，可以直接调用 获取收货地址
+        情景3： 假设 用户 点击获取收货地址的提示框 取消   
+            scope 值 false 
+              1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
+              2 获取收货地址
+  （3） 把获取到的收货地址， 存入到 本地存储\缓存中
 2 页面加载完毕
   0 onLoad  onShow 
   1 获取本地存储中的地址数据
@@ -87,8 +89,8 @@ Page({
    * @Description：点击 收货地址，错误流程演示
    * @CodeSteps：
       1 获取用户的收货地址
-        1 **.wxml绑定点击事件handleChooseAddressWrongFun
-        2 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
+        （1） **.wxml绑定点击事件handleChooseAddressWrongFun
+        （2） 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
    */
   handleChooseAddressWrongFun() {
     wx.chooseAddress({
@@ -101,17 +103,17 @@ Page({
    * @Description：点击 收货地址，正确流程演示
    * @CodeSteps：
       1 获取用户的收货地址
-        1 **.wxml绑定点击事件handleChooseAddressCorrectFun
-        2 正确流程：获取 用户 对小程序 所授予 获取地址的  权限 状态 scope
+        （1） **.wxml绑定点击事件handleChooseAddressCorrectFun
+        （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
    */
   handleChooseAddressCorrectFun() {
-    // 1 获取 权限状态
+    // I、获取 权限状态
     wx.getSetting({
       success:(result)=>{
         console.log(result);
         // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
         const scopeAddress = res1.authSetting["scope.address"];
-        // 2 判断 权限状态
+        // II、判断 权限状态
         if (scopeAddress ===true|| scopeAddress ===undefined){
           // 可以直接调用 获取收货地址
           wx.chooseAddress({
@@ -139,24 +141,24 @@ Page({
    * @Description：点击 收货地址，优化正确流程演示
    * @CodeSteps：
       1 获取用户的收货地址
-        1 **.wxml绑定点击事件handleChooseAddress
-        2 正确流程：获取 用户 对小程序 所授予 获取地址的  权限 状态 scope
+        （1） **.wxml绑定点击事件handleChooseAddress
+        （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
    */
   async handleChooseAddress() {
     try {
-      // 1 获取 权限状态
+      // I、获取 权限状态
       const res1 = await getSetting();
       // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
       const scopeAddress = res1.authSetting["scope.address"];
-      // 2 判断 权限状态
+      // II、判断 权限状态
       if (scopeAddress === false) {
         await openSetting();
       }
-      // 4 调用获取收货地址的 api
+      // 调用获取收货地址的 api
       let address = await chooseAddress();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
 
-      // 5 存入到缓存中
+      // （3） 把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
 
     } catch (error) {
