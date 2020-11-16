@@ -1,9 +1,11 @@
 <view class="tabs">
+  <!--导航标签-页面标题-->
   <view class="tabs_title">
     <view wx:for="{{navtabsDList}}" wx:key="id" class="title_item  {{item.isActive?'active':''}} " bindtap="changeSonTabEventFunD" data-index="{{index}}">
       {{item.value}}
     </view>
   </view>
+  <!--导航标签-页面内容-->
   <view class="tabs_content">
     <slot></slot>
   </view>

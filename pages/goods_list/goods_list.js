@@ -62,8 +62,6 @@ Page({
     this.QueryParams.cid=options.cid||"";
     this.QueryParams.query=options.query||"";
     this.getGoodsList();
-
-
   },
   /**
    * @Description：获取商品列表数据
@@ -79,14 +77,12 @@ Page({
       // 拼接了数组
       goodsList:[...this.data.goodsList,...res.goods]
     })
-
     // 关闭下拉刷新的窗口 如果没有调用下拉刷新的窗口 直接关闭也不会报错  
     wx.stopPullDownRefresh();
-      
   },
 
   /* 
-  * @Description：自定义标题点击事件 用来接收子组件传递的数据的
+  * @Description：一、自定义标题点击事件 用来接收子组件传递的数据的
   * 1、组件.js 文件中 存放事件回调函数的时候 必须要存在在 methods中！！！
   * 2、页面.js 文件中 存放事件回调函数的时候 存放在data同层级下！！！
   */
@@ -106,9 +102,9 @@ Page({
   //  1 判断还有没有下一页数据
     if(this.QueryParams.pagenum>=this.totalPages){
       // 没有下一页数据
-      //  console.log('%c'+"没有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
+      // console.log('%c'+"没有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
+      // 显示一会后，这个提示框“没有下一页数据”就会隐藏掉
       wx.showToast({ title: '没有下一页数据' });
-        
     }else{
       // 还有下一页数据
       //  console.log('%c'+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");

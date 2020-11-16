@@ -1,5 +1,5 @@
 <SearchInput></SearchInput>
-<!-- 监听自定义事件 -->
+<!-- 一、监听自定义标题点击事件 用来接收子组件传递的数据的 -->
 <NavTabsD navtabsDList="{{navtabsDList}}" bindfatherComponentCusEventName="receiveSonComponentData" >
   <block wx:if="{{navtabsDList[0].isActive}}">
     <view class="first_tab">
