@@ -80,6 +80,7 @@ page{
   }
   /*--------------------------- 五、底部工具栏 ---------------------------*/
   .btm_tool{
+    // 边框线
     border-top: 1rpx solid #ccc;
     // 固定定位
     position: fixed;
@@ -102,12 +103,16 @@ page{
       // 水平居中
       align-items: center;
       font-size: 24rpx;
+      // 相对定位
       position: relative;
       button{
+        // 绝对定位
         position: absolute;
         top: 0;
         left: 0;
+        // 和父元素一样宽
         width: 100%;
+        // 和父元素一样高
         height: 100%;
         opacity: 0;
       }
