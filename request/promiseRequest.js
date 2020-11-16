@@ -3,23 +3,18 @@ let ajaxTimes=0;
 export const promiseRequestVar=(params)=>{
   // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
   let header={...params.header};
-  console.log("---sssssss1");
   if(params.url.includes("/my/")){
-    console.log("---hhhhhh2");
     // 拼接header 带上token
     header["Authorization"]=wx.getStorageSync("token");
   }
-
-
+  
   ajaxTimes++;
   // 显示加载中 效果
   wx.showLoading({
     title: "加载中",
     mask: true
   });
-    
-
-  
+   
   /**
    * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取数据 
    */
