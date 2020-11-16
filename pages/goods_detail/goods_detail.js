@@ -92,7 +92,7 @@ Page({
     // 2 判断 商品对象是否存在于购物车数组中
     let index = cart.findIndex(v => v.goods_id === this.GoodsInfo.goods_id);
     if (index === -1) {
-      //3  不存在 第一次添加
+      //3  若不存在，则第一次新增元素\属性num
       this.GoodsInfo.num = 1;
       this.GoodsInfo.checked = true;
       cart.push(this.GoodsInfo);
