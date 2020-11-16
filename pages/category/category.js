@@ -37,7 +37,7 @@ Page({
     })
   },
   /**
-   * @Description：获取“商品分类”数据——方式1
+   * @Description：获取“商品分类”数据——方式1-使用请求Promise((resolve,reject)=>{wx.request({});})，简化返回值
    */
   gainProductClassifyDataFun1() {
     promiseRequestVar({
@@ -59,7 +59,7 @@ Page({
     })
   },
   /**
-   * @Description：获取“商品分类”数据——方式2
+   * @Description：获取“商品分类”数据——方式2-使用请求Promise((resolve,reject)=>{wx.request({});})、es7的async await，简化返回值
    * @Remark：
       async await就是Promise的语法糖
    */
