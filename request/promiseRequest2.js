@@ -17,6 +17,7 @@ export const promiseRequestVar2=(params)=>{
    
   /**
    * @Description：二、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取数据 
+   * @API文档：https://www.showdoc.com.cn/128719739414963?page_id=2513235043485226
    */
   // 定义公共的后台接口请求url
   const baseUrl="https://api-hmugo-web.itheima.net/api/public/v1";

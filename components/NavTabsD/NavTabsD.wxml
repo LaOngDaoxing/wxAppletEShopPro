@@ -1,6 +1,6 @@
 <view class="tabs">
   <view class="tabs_title">
-    <view wx:for="{{tabs}}" wx:key="id" class="title_item  {{item.isActive?'active':''}} " bindtap="changeSonTabEventFunD" data-index="{{index}}">
+    <view wx:for="{{navtabsDList}}" wx:key="id" class="title_item  {{item.isActive?'active':''}} " bindtap="changeSonTabEventFunD" data-index="{{index}}">
       {{item.value}}
     </view>
   </view>

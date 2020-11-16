@@ -1,7 +1,7 @@
 <SearchInput></SearchInput>
 <!-- 监听自定义事件 -->
-<NavTabsD tabs="{{tabs}}" bindfatherComponentCusEventName="receiveSonComponentData" >
-  <block wx:if="{{tabs[0].isActive}}">
+<NavTabsD navtabsDList="{{navtabsDList}}" bindfatherComponentCusEventName="receiveSonComponentData" >
+  <block wx:if="{{navtabsDList[0].isActive}}">
     <view class="first_tab">
       <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="goods_id" url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}">
         <!-- 左侧 图片容器 -->
@@ -16,6 +16,6 @@
       </navigator>
     </view>
   </block>
-  <block wx:elif="{{tabs[1].isActive}}">1</block>
-  <block wx:elif="{{tabs[2].isActive}}">2</block>
+  <block wx:elif="{{navtabsDList[1].isActive}}">1</block>
+  <block wx:elif="{{navtabsDList[2].isActive}}">2</block>
 </NavTabsD>

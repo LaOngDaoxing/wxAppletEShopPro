@@ -1,10 +1,9 @@
-// components/Tabs/Tabs.js
 Component({
   /**
    * 子组件的属性列表
    */
   properties: {
-    tabs:{
+    navtabsDList:{
       type:Array,
       value:[]
     }

@@ -61,7 +61,7 @@ Page({
   /**
    * @Description：获取“商品分类”数据——方式2-使用请求Promise((resolve,reject)=>{wx.request({});})、es7的async await，简化返回值
    * @Remark：
-      async await就是Promise的语法糖
+      async await就是Promise的语法糖，async await本质是异步请求
    */
   async gainProductClassifyDataFun2() {
     // 1 使用es7的async await来发送请求
