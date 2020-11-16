@@ -44,6 +44,7 @@ Page({
       url: "/productClassifyData"
     })
     .then(res => {
+      // console.log(res);
       this.productClassifyList = res;
       // 把接口的数据存入到本地存储中
       wx.setStorageSync("cates", { time: Date.now(), data: this.productClassifyList });
@@ -59,11 +60,13 @@ Page({
   },
   /**
    * @Description：获取“商品分类”数据——方式2
+   * @Remark：
+      async await就是Promise的语法糖
    */
   async gainProductClassifyDataFun2() {
     // 1 使用es7的async await来发送请求
     const res = await promiseRequestVar({ url: "/productClassifyData" });
-    console.log(res);
+    // console.log(res);
     this.productClassifyList = res;
     // 把接口的数据存入到本地存储中
     wx.setStorageSync("cates", { time: Date.now(), data: this.productClassifyList });
