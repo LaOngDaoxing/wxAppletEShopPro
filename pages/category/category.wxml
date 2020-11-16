@@ -6,7 +6,7 @@
   <view class="cates_container">
     <!-- 左侧菜单 -->
     <scroll-view scroll-y class="left_menu">
-      <view class="menu_item {{index===currentIndex?'active':''}}" wx:for="{{leftMenuList}}" wx:key="*this" bindtap="handleItemTap" data-index="{{index}}">
+      <view class="menu_item {{index===currentIndex?'active':''}}" wx:for="{{leftMenuList}}" wx:key="*this" bindtap="leftMenuClickEventFun" data-index="{{index}}">
         {{item}}
       </view>
     </scroll-view>
