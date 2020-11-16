@@ -11,8 +11,8 @@ Page({
     // 右侧内容的滚动条距离顶部的距离
     scrollTop: 0
   },
-  // 接口的返回数据》商品分类界面左侧菜单列表
-  leftMenuList: [],
+  // 接口的返回“商品分类”数据
+  productClassifyList: [],
 
   onLoad: function (options) {
     /* 
@@ -30,21 +30,21 @@ Page({
      */
 
     //  1 获取本地存储中的数据  (小程序中也是存在本地存储 技术)
-    const leftMenuList = wx.getStorageSync("cates");
+    const productClassifyList = wx.getStorageSync("cates");
     // 2 判断
-    if (!leftMenuList) {
+    if (!productClassifyList) {
       // 不存在  发送请求获取数据
-      this.getCates();
+      this.gainProductClassifyData();
     } else {
       // 有旧的数据 定义过期时间  10s 改成 5分钟
-      if (Date.now() - leftMenuList.time > 1000 * 10) {
+      if (Date.now() - productClassifyList.time > 1000 * 10) {
         // 重新发送请求
-        this.getCates();
+        this.gainProductClassifyData();
       } else {
         // 可以使用旧的数据
-        this.leftMenuList = leftMenuList.data;
-        let leftMenuList = this.leftMenuList.map(v => v.cat_name);
-        let rightContent = this.leftMenuList[0].children;
+        this.productClassifyList = productClassifyList.data;
+        let leftMenuList = this.productClassifyList.map(v => v.cat_name);
+        let rightContent = this.productClassifyList[0].children;
         this.setData({
           leftMenuList,
           rightContent
@@ -53,22 +53,22 @@ Page({
     }
 
   },
-  // 获取分类数据
-  async getCates() {
+  // 获取“商品分类”数据
+  async gainProductClassifyData() {
     // promiseRequestVar({
     //   url: "/productClassifyData"
     // })
     //   .then(res => {
-    //     this.leftMenuList = res.data.message;
+    //     this.productClassifyList = res.data.message;
 
     //     // 把接口的数据存入到本地存储中
-    //     wx.setStorageSync("cates", { time: Date.now(), data: this.leftMenuList });
+    //     wx.setStorageSync("cates", { time: Date.now(), data: this.productClassifyList });
 
 
     //     // 构造左侧的大菜单数据
-    //     let leftMenuList = this.leftMenuList.map(v => v.cat_name);
+    //     let leftMenuList = this.productClassifyList.map(v => v.cat_name);
     //     // 构造右侧的商品数据
-    //     let rightContent = this.leftMenuList[0].children;
+    //     let rightContent = this.productClassifyList[0].children;
     //     this.setData({
     //       leftMenuList,
     //       rightContent
@@ -77,14 +77,14 @@ Page({
 
     // 1 使用es7的async await来发送请求
     const res = await promiseRequestVar({ url: "/productClassifyData" });
-    // this.leftMenuList = res.data.message;
-    this.leftMenuList = res;
+    // this.productClassifyList = res.data.message;
+    this.productClassifyList = res;
     // 把接口的数据存入到本地存储中
-    wx.setStorageSync("cates", { time: Date.now(), data: this.leftMenuList });
+    wx.setStorageSync("cates", { time: Date.now(), data: this.productClassifyList });
     // 构造左侧的大菜单数据
-    let leftMenuList = this.leftMenuList.map(v => v.cat_name);
+    let leftMenuList = this.productClassifyList.map(v => v.cat_name);
     // 构造右侧的商品数据
-    let rightContent = this.leftMenuList[0].children;
+    let rightContent = this.productClassifyList[0].children;
     this.setData({
       leftMenuList,
       rightContent
@@ -99,7 +99,7 @@ Page({
      */
     const { index } = e.currentTarget.dataset;
 
-    let rightContent = this.leftMenuList[index].children;
+    let rightContent = this.productClassifyList[index].children;
     this.setData({
       currentIndex: index,
       rightContent,
