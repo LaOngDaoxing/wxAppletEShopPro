@@ -25,9 +25,12 @@ page{
     color: var(--themeColor);
   }
   .goods_name_row{
+    // 上下边框线
     border-top: 5rpx solid #dedede;
     border-bottom: 5rpx solid #dedede;
+    // 上边框间距
     padding: 10rpx 0;
+    // 伸缩盒子
     display: flex;
     /*--------------------------- 三_1、商品名称 ---------------------------*/
     .goods_name{
@@ -35,7 +38,7 @@ page{
       color: #000;
       font-size: 30rpx;
       padding: 0 10rpx;
-  
+      // 超过2行，显示省略号...
       display: -webkit-box;
       overflow: hidden;
       -webkit-box-orient: vertical;
@@ -44,10 +47,15 @@ page{
     /*--------------------------- 三_2、商品收藏 ---------------------------*/
     .goods_collect{
       flex: 1;
+      // 伸缩盒子
       display: flex;
+      // 主轴方向为上下方向
       flex-direction: column;
+      // 垂直居中
       justify-content: center;
+      // 水平居中
       align-items: center;
+      // 左边框线
       border-left: 1rpx solid #000;
       .iconfont{}
       .icon-shoucang1{
@@ -59,8 +67,11 @@ page{
   /*--------------------------- 四、图文详情 ---------------------------*/
   .goods_info{
     .goods_info_title{
+      // 字体大小
       font-size: 32rpx;
+      // 字体颜色设置为主题颜色
       color: var(--themeColor);
+      // 加粗
       font-weight: 600;
       padding: 20rpx;
     }

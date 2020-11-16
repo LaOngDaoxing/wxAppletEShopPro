@@ -17,7 +17,7 @@
     <view class="collect_text">收藏</view>
   </view>
 </view>
-
+<!--四、图文详情-->
 <view class="goods_info">
   <view class="goods_info_title">图文详情</view>
   <view class="goods_info_content">
@@ -26,7 +26,7 @@
     <rich-text nodes="{{goodsObj.goods_introduce}}"></rich-text>
   </view>
 </view>
-
+<!--五、-->
 <view class="btm_tool">
   <view class="tool_item">
     <view class="iconfont icon-kefu"></view>
