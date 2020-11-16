@@ -1,5 +1,5 @@
 /* 
-1 用户上滑页面 滚动条触底 开始加载下一页数据
+1 用户页面上滑\滚动条触底事件\加载下一页数据
   1 找到滚动条触底事件  微信小程序官方开发文档寻找
   2 判断还有没有下一页数据
     1 获取到总页数  只有总条数
@@ -63,6 +63,22 @@ Page({
     this.QueryParams.query=options.query||"";
     this.getGoodsList();
   },
+  /* 
+  * @Description：一、自定义组件（导航标签-页面标题）点击事件，用来接收子组件传递的数据的
+  * 1、组件.js 文件中 存放事件回调函数的时候 必须要存在在 methods中！！！
+  * 2、页面.js 文件中 存放事件回调函数的时候 存放在data同层级下！！！
+  */
+  receiveSonComponentData(e){
+    // 1 获取被点击的标题索引
+    const {index}=e.detail;
+    // 2 修改源数组
+    let {navtabsDList}=this.data;
+    navtabsDList.forEach((v,i)=>i===index?v.isActive=true:v.isActive=false);
+    // 3 赋值到data中
+    this.setData({
+      navtabsDList
+    })
+  },
   /**
    * @Description：获取商品列表数据
    */
@@ -80,24 +96,9 @@ Page({
     // 关闭下拉刷新的窗口 如果没有调用下拉刷新的窗口 直接关闭也不会报错  
     wx.stopPullDownRefresh();
   },
-
-  /* 
-  * @Description：一、自定义标题点击事件 用来接收子组件传递的数据的
-  * 1、组件.js 文件中 存放事件回调函数的时候 必须要存在在 methods中！！！
-  * 2、页面.js 文件中 存放事件回调函数的时候 存放在data同层级下！！！
-  */
-  receiveSonComponentData(e){
-    // 1 获取被点击的标题索引
-    const {index}=e.detail;
-    // 2 修改源数组
-    let {navtabsDList}=this.data;
-    navtabsDList.forEach((v,i)=>i===index?v.isActive=true:v.isActive=false);
-    // 3 赋值到data中
-    this.setData({
-      navtabsDList
-    })
-  },
-  // 页面上滑 滚动条触底事件
+  /**
+   * @Description：用户页面上滑\滚动条触底事件\加载下一页数据
+   */
   onReachBottom(){
   //  1 判断还有没有下一页数据
     if(this.QueryParams.pagenum>=this.totalPages){
@@ -107,13 +108,16 @@ Page({
       wx.showToast({ title: '没有下一页数据' });
     }else{
       // 还有下一页数据
-      //  console.log('%c'+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
+      // console.log('%c'+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
       this.QueryParams.pagenum++;
       this.getGoodsList();
     }
   },
-  // 下拉刷新事件 
+  /**
+   * @Description：下拉刷新事件 
+   */
   onPullDownRefresh(){
+    // console.log('%c'+"刷新","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
     // 1 重置数组
     this.setData({
       goodsList:[]
