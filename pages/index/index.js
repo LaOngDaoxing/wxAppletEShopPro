@@ -10,7 +10,15 @@ Page({
     // 四、楼层数据
     floorList:[]
   },
-  // 页面开始加载 就会触发
+  /**
+   * @Description：页面开始加载 就会触发
+   * @Bug：
+      onLoad(){
+        promiseRequest.js每次发送请求过程中显示提示框“加载中”，获得响应后关闭提示框“加载中”；
+        index.js的onLoad事件方法中，同时发送3个请求；
+        promiseRequest.js应在最后一个请求返回响应后，再关闭提示框“加载中”；
+      }
+   */
   onLoad: function (options) {
     // 二_方式1、使用原生请求wx.request({});调用后台接口，获取轮播图数据
     // this.useMulitWxRequestInOneFunMayBugToGetSlideshowList();
@@ -20,7 +28,6 @@ Page({
     this.usePromiseWxRequestToGetClassifyNavList();
     // 四、使用请求Promise((resolve,reject)=>{wx.request({});})，根据定义公共的后台接口请求url，调用后台接口并获取楼层数据
     this.usePromiseWxRequestToGetFloorList();
-      
   },
   /**
   * @Description：二_方式1、使用原生请求wx.request({});调用后台接口，获取轮播图数据 
