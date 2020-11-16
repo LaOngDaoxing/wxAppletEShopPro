@@ -60,6 +60,12 @@
         {
           "name": "pages/goods_list/goods_list",
           "pathName": "pages/goods_list/goods_list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/cart/cart",
+          "pathName": "pages/cart/cart",
           "scene": null
         }
       ]
