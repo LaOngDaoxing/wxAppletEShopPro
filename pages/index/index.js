@@ -90,7 +90,7 @@ Page({
   usePromiseWxRequestToGetFloorList(){
     promiseRequestVar({ url: "/floorData" })
     .then(result => {
-      console.log(result);
+      // console.log(result);
       this.setData({
         floorList: result
       })
