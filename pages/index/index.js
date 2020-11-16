@@ -14,6 +14,7 @@ Page({
    * @Description：页面开始加载 就会触发
    * @Bug：
       onLoad(){
+        // 全局正在“加载中”效果
         promiseRequest.js每次发送请求过程中显示提示框“加载中”，获得响应后关闭提示框“加载中”；
         index.js的onLoad事件方法中，同时发送3个请求；
         promiseRequest.js应在最后一个请求返回响应后，再关闭提示框“加载中”；

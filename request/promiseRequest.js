@@ -1,4 +1,4 @@
-// 同时发送异步请求的次数
+// 同时发送异步请求的次数，用于实现全局正在“加载中”效果
 let ajaxTimes=0;
 export const promiseRequestVar=(params)=>{
   // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
