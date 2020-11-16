@@ -9,7 +9,7 @@ export const promiseRequestVar2=(params)=>{
   }
   
   ajaxTimes++;
-  // 显示加载中 效果
+  // 每次发送请求过程中显示提示框“加载中”，获得响应后关闭提示框“加载中”
   wx.showLoading({
     title: "加载中",
     mask: true
