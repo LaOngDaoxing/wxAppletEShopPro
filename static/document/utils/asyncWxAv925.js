@@ -26,7 +26,25 @@ export const getSettingVar=()=>{
   })
 }
 /**
- * @Description：二、获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
+ * @Description：二、调起客户端小程序设置界面，返回用户设置的操作结果。设置界面只会出现小程序已经向用户请求过的权限。
+ * @Debug：Promise是异步请求；官方要求只能用button点击事件或点击行为同步触发，wx.openSetting。
+ * @Solution：
+
+ */
+export const openSettingVar=()=>{
+  return new Promise((resolve,reject)=>{
+    wx.openSetting({
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
+ * @Description：三、获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
  * @Grammer规则：
       使用请求Promise((resolve,reject)=>{wx.chooseAddress({});})
  */
@@ -45,24 +63,6 @@ export const chooseAddressVar=()=>{
     });
   })
 }
-
-/**
- * 
- * promise是异步的，“点击行为允许调用”openSetting这个机制要求是同步的
- */
-export const openSettingVar=()=>{
-  return new Promise((resolve,reject)=>{
-    wx.openSetting({
-      success: (result) => {
-        resolve(result);
-      },
-      fail: (err) => {
-        reject(err);
-      }
-    });
-  })
-}
-
 /**
  *  promise 形式  showModal
  * @param {object} param0 参数
