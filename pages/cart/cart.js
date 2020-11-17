@@ -90,13 +90,13 @@ Page({
     totalNum: 0
   },
   onShow() {
-    // // 1 获取缓存中的收货地址信息
-    // const address = wx.getStorageSync("address");
-    // // 1 获取缓存中的购物车数据
-    // const cart = wx.getStorageSync("cart") || [];
+    // 1 获取缓存中的收货地址信息
+    const address = wx.getStorageSync("address");
+    // 1 获取缓存中的购物车数据
+    const cart = wx.getStorageSync("cart") || [];
 
-    // this.setData({ address });
-    // this.setCart(cart);
+    this.setData({ address });
+    this.setCart(cart);
 
   },
   /**
@@ -206,22 +206,7 @@ Page({
   async handleChooseAddress() {
     // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
     try {
-      // I、获取 权限状态
-      const res1 = await getSettingVar();
-      // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
-      const scopeAddress = res1.authSetting["scope.address"];
-      console.log(res1);
-        // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-        wx.openSetting({
-          success: (result) => {
-            resolve(result);
-          },
-          fail: (err) => {
-            reject(err);
-          }
-        });
-      // 调用获取收货地址的 api
-      let address =  chooseAddressVar();
+      let address = await chooseAddressVar();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
       // III、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);

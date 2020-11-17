@@ -46,16 +46,12 @@ export const getSettingVar=()=>{
 
  */
 export const openSettingVar=()=>{
-  // return new Promise((resolve,reject)=>{
     wx.openSetting({
       success: (result) => {
-        resolve(result);
       },
       fail: (err) => {
-        reject(err);
       }
     });
-  // })
 }
 /**
  * @Description：三、获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
@@ -63,19 +59,21 @@ export const openSettingVar=()=>{
       使用请求Promise((resolve,reject)=>{wx.chooseAddress({});})
  */
 export const chooseAddressVar=()=>{
-  // return new Promise((resolve,reject)=>{
+  return new Promise((resolve,reject)=>{
     // 获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
     wx.chooseAddress({
       // 接口调用成功的回调函数
       success: (result) => {
         resolve(result);
+        console.log("--------------------------------");
+        console.log(result);
       },
       // 接口调用失败的回调函数
       fail: (err) => {
         reject(err);
       }
     });
-  // })
+  })
 }
 /**
  *  promise 形式  showModal
