@@ -1,6 +1,9 @@
 /**
  * promise 形式  getSetting
  */
+  /**
+   * @Description：二、使用请求Promise((resolve,reject)=>{wx.getSetting({});})，根据定义公共的后台接口请求url，调用后台接口并获取数据 
+   */
 export const getSetting=()=>{
   return new Promise((resolve,reject)=>{
     wx.getSetting({

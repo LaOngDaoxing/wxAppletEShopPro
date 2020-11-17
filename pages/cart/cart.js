@@ -7,14 +7,14 @@
       I、获取用户对小程序所授予的“获取地址的权限状态scope”
       II、判断 权限状态scope
         情景1： 假设 用户 点击获取收货地址的提示框 确定  authSetting scope.address 
-            scope 值 true，可以直接调用 获取收货地址
+            scope 值 true，可以直接调用 获取收货地址的 api
         情景2： 假设 用户 从来没有调用过 收货地址的api 
-            scope undefined，可以直接调用 获取收货地址
+            scope 值 undefined，可以直接调用 获取收货地址的 api
         情景3： 假设 用户 点击获取收货地址的提示框 取消   
             scope 值 false 
               1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-              2 获取收货地址
-  （3） 把获取到的收货地址， 存入到 本地存储\缓存中
+              2 调用 获取收货地址的 api
+      III、把获取到的收货地址， 存入到 本地存储\缓存中
 2 页面加载完毕
   0 onLoad  onShow 
   1 获取本地存储中的地址数据
@@ -93,6 +93,7 @@ Page({
         （2） 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
    */
   handleChooseAddressWrongFun() {
+    // 调用 获取收货地址的 api
     wx.chooseAddress({
       success:(result)=>{
         console.log(result);
@@ -115,7 +116,7 @@ Page({
         const scopeAddress = res1.authSetting["scope.address"];
         // II、判断 权限状态
         if (scopeAddress ===true|| scopeAddress ===undefined){
-          // 可以直接调用 获取收货地址
+          // 可以直接调用 获取收货地址的 api
           wx.chooseAddress({
             success:(result1)=>{
               console.log(result1);
@@ -125,7 +126,7 @@ Page({
           // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
           wx.openSetting({
             success:(result2)=>{
-              // 可以调用 获取收货地址
+              // 可以调用 获取收货地址的 api
               wx.chooseAddress({
                 success:(result3)=>{
                   console.log(result3);
@@ -145,6 +146,7 @@ Page({
         （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
    */
   async handleChooseAddress() {
+    // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
     try {
       // I、获取 权限状态
       const res1 = await getSetting();
@@ -152,16 +154,17 @@ Page({
       const scopeAddress = res1.authSetting["scope.address"];
       // II、判断 权限状态
       if (scopeAddress === false) {
+        // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
         await openSetting();
       }
       // 调用获取收货地址的 api
       let address = await chooseAddress();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
-
-      // （3） 把获取到的收货地址， 存入到 本地存储\缓存中
+      // III、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
-
-    } catch (error) {
+    } 
+    // 在catch中处理Promise((resolve,reject)=>{wx.getSetting({fail: (err) => {}});})
+    catch (error) {
       console.log(error);
     }
   },
