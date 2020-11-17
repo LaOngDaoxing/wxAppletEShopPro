@@ -24,7 +24,7 @@
       2、Promise.resolve(value)方法返回一个以给定值解析后的Promise对象，从而控制异步流程。
  */
 export const getSettingVar=()=>{
-  // new Promise的实例，是一个对象，不是一个函数。
+  // 实例化对象new Promise，返回是一个对象，不是一个函数。
   return new Promise((resolve,reject)=>{
     // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
     wx.getSetting({

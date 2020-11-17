@@ -3,9 +3,23 @@
  * @Reference：
       1、微信官方9.25之前版接口授权
  * @Grammer规则：
-      使用请求Promise((resolve,reject)=>{wx.getSetting({});})
+      1、使用构造函数实例化对象var pVar=new Promise((resolve,reject)=>{wx.getSetting({});})，实现异步请求。
+          @Param：excutor(resolve,reject) 单元函数
+          @Param：resolve 静态方法
+          @Param：reject  静态方法    
+          执行构造函数实例化对象new Promise((resolve,reject)=>{wx.getSetting({});})时，立即将构造函数中的两个参数函数resolve、reject，作为参数传递给单元函数excutor(resolve,reject)。
+          （1）单元函数excutor，调用静态方法resolve、reject
+              在单元函数excutor(resolve,reject){中调用resolve方法时，Promise的状态就变成fulfilled，即操作成功状态}
+              在单元函数excutor(resolve,reject){中调用reject方法时，Promise的状态就变成rejected，即操作失败状态}
+          （2）然后进入原型Promise.prototype(then,catch)
+          （3）Promise实例调用then方法
+              当Promise的状态就变成fulfilled时，pVar.then(onfulfilled,onrejected)中，执行onfulfilled
+              当Promise的状态就变成rejected时，pVar.catch(onfulfilled,onrejected)中，执行onrejected
+
+      2、Promise.resolve(value)方法返回一个以给定值解析后的Promise对象，从而控制异步流程。
  */
 export const getSettingBv925Var=()=>{
+  // 实例化对象new Promise，返回是一个对象，不是一个函数。
   return new Promise((resolve,reject)=>{
     // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
     wx.getSetting({
