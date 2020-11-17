@@ -22,16 +22,16 @@ export const getSettingBv925Var=()=>{
 }
 /**
  * @Description：二、调起客户端小程序设置界面，返回用户设置的操作结果。设置界面只会出现小程序已经向用户请求过的权限。
- * @Debug：Promise是异步请求；官方要求只能用button点击事件或点击行为同步触发，wx.openSetting。
- * @Solution：
-
  */
 export const openSettingBv925Var=()=>{
   return new Promise((resolve,reject)=>{
+    // 调起客户端小程序设置界面，返回用户设置的操作结果。设置界面只会出现小程序已经向用户请求过的权限。
     wx.openSetting({
+      // 接口调用成功的回调函数
       success: (result) => {
         resolve(result);
       },
+      // 接口调用失败的回调函数	
       fail: (err) => {
         reject(err);
       }
