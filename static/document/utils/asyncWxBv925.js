@@ -1,16 +1,11 @@
 /**
  * @Description：一、获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
  * @Reference：
-      1、微信官方9.25及之后版接口授权修改
-        接口名称               功能说明             对应授权
-        wx.chooseAddress      获取用户收货地址      scope.address
-        wx.chooselnvoiceTitle 选择用户的发票抬头    scope.invoiceTitle
-        wx.chooselnvoice      选择用户已有的发票    scope.invoice
-        若开发者调用wx.getSetting接口请求用户的授权状态，会直接读取到以上3个授权为true
+      1、微信官方9.25之前版接口授权
  * @Grammer规则：
       使用请求Promise((resolve,reject)=>{wx.getSetting({});})
  */
-export const getSetting=()=>{
+export const getSettingBv925Var=()=>{
   return new Promise((resolve,reject)=>{
     // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
     wx.getSetting({
@@ -30,7 +25,7 @@ export const getSetting=()=>{
  * @Grammer规则：
       使用请求Promise((resolve,reject)=>{wx.chooseAddress({});})
  */
-export const chooseAddress=()=>{
+export const chooseAddressBv925Var=()=>{
   return new Promise((resolve,reject)=>{
     // 获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
     wx.chooseAddress({
@@ -47,9 +42,10 @@ export const chooseAddress=()=>{
 }
 
 /**
- * promise 形式  openSetting
+ * 
+ * promise是异步的，“点击行为允许调用”openSetting这个机制要求是同步的
  */
-export const openSetting=()=>{
+export const openSettingBv925Var=()=>{
   return new Promise((resolve,reject)=>{
     wx.openSetting({
       success: (result) => {
@@ -66,7 +62,7 @@ export const openSetting=()=>{
  *  promise 形式  showModal
  * @param {object} param0 参数
  */
-export const showModal=({content})=>{
+export const showModalBv925Var=({content})=>{
   return new Promise((resolve,reject)=>{
     wx.showModal({
       title: '提示',
@@ -86,7 +82,7 @@ export const showModal=({content})=>{
  *  promise 形式  showToast
  * @param {object} param0 参数
  */
-export const showToast=({title})=>{
+export const showToastBv925Var=({title})=>{
   return new Promise((resolve,reject)=>{
     wx.showToast({
       title: title,
@@ -104,7 +100,7 @@ export const showToast=({title})=>{
 /**
  * promise 形式  login
  */
-export const login=()=>{
+export const loginBv925Var=()=>{
   return new Promise((resolve,reject)=>{
     wx.login({
       timeout:10000,
@@ -122,7 +118,7 @@ export const login=()=>{
  * promise 形式的 小程序的微信支付
  * @param {object} pay 支付所必要的参数
  */
-export const requestPayment=(pay)=>{
+export const requestPaymentBv925Var=(pay)=>{
   return new Promise((resolve,reject)=>{
    wx.requestPayment({
       ...pay,
@@ -133,6 +129,5 @@ export const requestPayment=(pay)=>{
        reject(err);
      }
    });
-     
   })
 }
