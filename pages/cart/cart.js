@@ -1,19 +1,32 @@
 /* 
 1 获取用户的收货地址
   （1） **.wxml绑定点击事件
-  （2） 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
+  （2） 错误流程：仅调用微信小程序内置api即wx.chooseAddress({})，获取用户的收货地址 
 
-  （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+  （2） 微信官方9.25之前版接口授权的正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
       I、获取用户对小程序所授予的“获取地址的权限状态scope”
       II、判断 权限状态scope，然后调用 获取收货地址的 api
-        情景1： 假设 用户 点击获取收货地址的提示框 确定  authSetting scope.address 
-            scope 值 true，可以直接调用 获取收货地址的 api
-        情景2： 假设 用户 从来没有调用过 收货地址的api 
-            scope 值 undefined，可以直接调用 获取收货地址的 api
-        情景3： 假设 用户 点击获取收货地址的提示框 取消   
-            scope 值 false 
-              1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-              2 调用 获取收货地址的 api
+        情景1： 用户点击“**需要访问你的通讯地址提示框的确定按钮”
+            操作步骤
+               菜单栏》点击清缓存》
+               使用wx.chooseAddress({})，注释wx.getSetting({})；用户点击“**需要访问你的通讯地址提示框的确定按钮”》选择地址页面>选择地址>点击确定》
+               注释wx.chooseAddress({})，使用wx.getSetting({})》scope 值 true》
+            解决方案
+                1 可以直接调用 获取收货地址的 api
+        情景2： 用户从未点击过“**需要访问你的通讯地址提示框的确定按钮”
+            操作步骤
+               菜单栏》点击清缓存》
+               注释wx.chooseAddress({})，使用wx.getSetting({})》scope 值 undefined》
+            解决方案
+                1 可以直接调用 获取收货地址的 api
+        情景3： 用户点击“**需要访问你的通讯地址提示框的取消按钮”
+            操作步骤
+               菜单栏》点击清缓存》
+               使用wx.chooseAddress({})，注释wx.getSetting({})；用户点击“**需要访问你的通讯地址提示框的取消按钮”》
+               注释wx.chooseAddress({})，使用wx.getSetting({})；点击获取收货地址》scope 值 false 》
+            解决方案
+                1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
+                2 调用 获取收货地址的 api
       III、把获取到的收货地址， 存入到 本地存储\缓存中
 2 页面加载完毕
   0 判断选择使用onLoad  onShow ；由于购物车页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
@@ -76,44 +89,57 @@ Page({
     totalNum: 0
   },
   onShow() {
-    // 1 获取缓存中的收货地址信息
-    const address = wx.getStorageSync("address");
-    // 1 获取缓存中的购物车数据
-    const cart = wx.getStorageSync("cart") || [];
+    // // 1 获取缓存中的收货地址信息
+    // const address = wx.getStorageSync("address");
+    // // 1 获取缓存中的购物车数据
+    // const cart = wx.getStorageSync("cart") || [];
 
-    this.setData({ address });
-    this.setCart(cart);
+    // this.setData({ address });
+    // this.setCart(cart);
 
   },
   /**
-   * @Description：点击 收货地址，错误流程演示
-   * @CodeSteps：
-      1 获取用户的收货地址
-        （1） **.wxml绑定点击事件handleChooseAddressWrongFun
-        （2） 错误流程：调用小程序内置 api  获取用户的收货地址  wx.chooseAddress
-   */
-  handleChooseAddressWrongFun() {
-    // 调用 获取收货地址的 api
-    wx.chooseAddress({
-      success:(result)=>{
-        console.log(result);
-      }
-    })
-  },
-    /**
    * @Description：点击 收货地址，正确流程演示
    * @CodeSteps：
       1 获取用户的收货地址
-        （1） **.wxml绑定点击事件handleChooseAddressCorrectFun
-        （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+        （1） **.wxml绑定点击事件useWxBuiltInApiBv925ToHandleChooseAddressFun1
+        （2） 微信官方9.25之前版接口授权的正确流程：调用微信小程序内置api，获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
    */
-  handleChooseAddressCorrectFun() {
+  useWxBuiltInApiBv925ToHandleChooseAddressFun1() {
+    // 获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
+    // wx.chooseAddress({
+    //   // 接口调用成功的回调函数
+    //   success:(result)=>{
+    //     console.log(result);
+    //   }
+    // });
+    // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
+    wx.getSetting({
+      // 接口调用成功的回调函数
+      success: (result) => {
+        // {errMsg: "getSetting:ok", authSetting: {scope.address: true, scope.invoice: true, scope.invoiceTitle: true}}
+       console.log(result);
+      },
+      // 接口调用失败的回调函数
+      fail: () => {},
+      // 接口调用结束的回调函数（调用成功、失败都会执行）
+      complete: () => {}
+    });
+  },
+    /**
+   * @Description：点击 收货地址，正确完整流程演示
+   * @CodeSteps：
+      1 获取用户的收货地址
+        （1） **.wxml绑定点击事件useWxBuiltInApiBv925ToHandleChooseAddressFun2
+        （2） 微信官方9.25之前版接口授权的正确流程：调用微信小程序内置api，获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+   */
+  useWxBuiltInApiBv925ToHandleChooseAddressFun2() {
     // I、获取 权限状态
     wx.getSetting({
       success:(result)=>{
         console.log(result);
         // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
-        const scopeAddress = res1.authSetting["scope.address"];
+        const scopeAddress = result.authSetting["scope.address"];
         // II、判断 权限状态
         if (scopeAddress ===true|| scopeAddress ===undefined){
           // 可以直接调用 获取收货地址的 api
@@ -139,11 +165,42 @@ Page({
     })
   },
   /**
-   * @Description：点击 收货地址，优化正确流程演示
+   * @Description：点击 收货地址，优化正确完整流程演示
+   * @CodeSteps：
+      1 获取用户的收货地址
+        （1） **.wxml绑定点击事件useWxBuiltInApiBv925ToHandleChooseAddressFun3
+        （2） 微信官方9.25之前版接口授权的正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+   */
+  async useWxBuiltInApiBv925ToHandleChooseAddressFun3() {
+    // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
+    try {
+      // I、获取 权限状态
+      const res1 = await getSetting();
+      // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
+      const scopeAddress = res1.authSetting["scope.address"];
+      console.log(scopeAddress);
+      // II、判断 权限状态
+      if (scopeAddress === false) {
+        // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
+        await openSetting();
+      }
+      // 调用获取收货地址的 api
+      let address = await chooseAddress();
+      address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
+      // III、把获取到的收货地址， 存入到 本地存储\缓存中
+      wx.setStorageSync("address", address);
+    } 
+    // 在catch中处理Promise((resolve,reject)=>{wx.getSetting({fail: (err) => {}});})
+    catch (error) {
+      console.log(error);
+    }
+  },
+  /**
+   * @Description：点击 收货地址，优化正确完整流程演示
    * @CodeSteps：
       1 获取用户的收货地址
         （1） **.wxml绑定点击事件handleChooseAddress
-        （2） 正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
+        （2） 微信官方9.25及之后版接口授权的正确流程：获取用户对小程序所授予的“获取地址的权限状态scope”，并分情况处理
    */
   async handleChooseAddress() {
     // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
@@ -152,11 +209,9 @@ Page({
       const res1 = await getSetting();
       // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
       const scopeAddress = res1.authSetting["scope.address"];
-      // II、判断 权限状态
-      if (scopeAddress === false) {
-        // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-        await openSetting();
-      }
+      console.log(res1);
+              // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
+              await openSetting();
       // 调用获取收货地址的 api
       let address = await chooseAddress();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
