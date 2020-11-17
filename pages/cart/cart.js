@@ -212,9 +212,16 @@ Page({
       const scopeAddress = res1.authSetting["scope.address"];
       console.log(res1);
         // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-        await openSettingVar();
+        wx.openSetting({
+          success: (result) => {
+            resolve(result);
+          },
+          fail: (err) => {
+            reject(err);
+          }
+        });
       // 调用获取收货地址的 api
-      let address = await chooseAddressVar();
+      let address =  chooseAddressVar();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
       // III、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
