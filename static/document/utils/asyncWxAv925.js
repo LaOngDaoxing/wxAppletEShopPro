@@ -8,11 +8,11 @@
         wx.chooselnvoice      选择用户已有的发票    scope.invoice
         若开发者调用wx.getSetting接口请求用户的授权状态，会直接读取到以上3个授权为true
  * @Grammer规则：
-      1、使用实例化构造函数var pVar=new Promise((resolve,reject)=>{wx.getSetting({});})，实现异步请求。
+      1、使用构造函数实例化对象var pVar=new Promise((resolve,reject)=>{wx.getSetting({});})，实现异步请求。
           @Param：excutor(resolve,reject) 单元函数
           @Param：resolve 静态方法
           @Param：reject  静态方法    
-          执行构造函数new Promise((resolve,reject)=>{wx.getSetting({});})时，立即将构造函数中的两个参数函数resolve、reject，作为参数传递给单元函数excutor(resolve,reject)。
+          执行构造函数实例化对象new Promise((resolve,reject)=>{wx.getSetting({});})时，立即将构造函数中的两个参数函数resolve、reject，作为参数传递给单元函数excutor(resolve,reject)。
           （1）单元函数excutor，调用静态方法resolve、reject
               在单元函数excutor(resolve,reject){中调用resolve方法时，Promise的状态就变成fulfilled，即操作成功状态}
               在单元函数excutor(resolve,reject){中调用reject方法时，Promise的状态就变成rejected，即操作失败状态}
@@ -24,6 +24,7 @@
       2、Promise.resolve(value)方法返回一个以给定值解析后的Promise对象，从而控制异步流程。
  */
 export const getSettingVar=()=>{
+  // new Promise的实例，是一个对象，不是一个函数。
   return new Promise((resolve,reject)=>{
     // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
     wx.getSetting({
