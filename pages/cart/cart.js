@@ -78,7 +78,7 @@
     1 确定 直接执行删除
     2 取消  什么都不做 
   4 直接修改商品对象的数量 num
-  5 把数组cart 重新设置回 缓存中 和data中 this.setCartFun(cart)
+  5 把数组cart 重新设置回 缓存中 和data中 this.setCartCheckedAndFootertoolShowFun(cart)
 三、底部工具栏  
 9 点击结算
   1 判断有没有收货地址信息
@@ -111,7 +111,7 @@ Page({
     const cart = wx.getStorageSync("cart") || [];
     // 2、把数据 设置给data中的一个变量
     this.setData({ address });
-    this.setCartFun(cart);
+    this.setCartCheckedAndFootertoolShowFun(cart);
     /*------------------------------------------- 一二.2、获取本地存储\缓存中信息，并在页面显示 结束--------------------------------------*/
   },
   /*--------------------------------------------- 一.1、获取收货地址，存入本地存储\缓存 开始---------------------------------------------*/
@@ -244,8 +244,9 @@ Page({
       三元运算举例
         // 判断购物车数组是否为空。如果购物车中有商品true、购物车中没有商品false。
         allChecked = cart.length != 0 ? allChecked : false;
+        
    */
-  setCartFun(cart) {
+  setCartCheckedAndFootertoolShowFun(cart) {
     // 全选
     let allChecked = true;
     // 合计金额
@@ -295,7 +296,7 @@ Page({
     // （4） 商品对象的选中状态 取反
     cart[index].checked = !cart[index].checked;
     // 三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
-    this.setCartFun(cart);
+    this.setCartCheckedAndFootertoolShowFun(cart);
   },
   /**
    * @Description：商品全选功能
@@ -308,7 +309,7 @@ Page({
     // 3 循环修改cart数组 中的商品选中状态
     cart.forEach(v => v.checked = allChecked);
     // 4 把修改后的值 填充回data或者缓存中
-    this.setCartFun(cart);
+    this.setCartCheckedAndFootertoolShowFun(cart);
   },
   /**  
    * @Description：商品数量的编辑功能
@@ -326,13 +327,13 @@ Page({
       const res = await showModal({ content: "您是否要删除？" });
       if (res.confirm) {
         cart.splice(index, 1);
-        this.setCartFun(cart);
+        this.setCartCheckedAndFootertoolShowFun(cart);
       }
     } else {
       // 4  进行修改数量
       cart[index].num += operation;
       // 5 设置回缓存和data中
-      this.setCartFun(cart);
+      this.setCartCheckedAndFootertoolShowFun(cart);
     }
   },
   /**
