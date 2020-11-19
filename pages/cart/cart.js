@@ -12,13 +12,13 @@
                使用wx.chooseAddress({})，注释wx.getSetting({})；用户点击“**需要访问你的通讯地址提示框的确定按钮”》选择地址页面>选择地址>点击确定》
                注释wx.chooseAddress({})，使用wx.getSetting({})》scope 值 true》
             解决方案
-                1 可以直接调用 获取收货地址的 api
+                III、调用 获取收货地址的 api
         情景2： 用户从未点击过“**需要访问你的通讯地址提示框的确定按钮”
             操作步骤
                菜单栏》点击清缓存》
                注释wx.chooseAddress({})，使用wx.getSetting({})》scope 值 undefined》
             解决方案
-                1 可以直接调用 获取收货地址的 api
+                III、调用 获取收货地址的 api
         情景3： 用户点击“**需要访问你的通讯地址提示框的取消按钮”
             操作步骤
                菜单栏》点击清缓存》
@@ -26,8 +26,9 @@
                注释wx.chooseAddress({})，使用wx.getSetting({})；点击获取收货地址》scope 值 false 》
             解决方案
                 1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-                2 调用 获取收货地址的 api
-      III、把获取到的收货地址， 存入到 本地存储\缓存中
+                III、调用 获取收货地址的 api
+      III、调用 获取收货地址的 api
+      IV、把获取到的收货地址， 存入到 本地存储\缓存中
 2 页面加载完毕
   0 判断选择使用onLoad  onShow ；由于购物车页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
   1 获取本地存储中的地址数据
@@ -142,7 +143,7 @@ Page({
         const scopeAddress = result.authSetting["scope.address"];
         // II、判断 权限状态
         if (scopeAddress ===true|| scopeAddress ===undefined){
-          // 可以直接调用 获取收货地址的 api
+          // III、调用 获取收货地址的 api
           wx.chooseAddress({
             success:(result1)=>{
               console.log(result1);
@@ -152,7 +153,7 @@ Page({
           // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
           wx.openSetting({
             success:(result2)=>{
-              // 可以调用 获取收货地址的 api
+              // III、调用 获取收货地址的 api
               wx.chooseAddress({
                 success:(result3)=>{
                   console.log(result3);
@@ -184,10 +185,10 @@ Page({
         // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
         await openSettingVar();
       }
-      // 调用获取收货地址的 api
+      // III、调用 获取收货地址的 api
       let address = await chooseAddressVar();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
-      // III、把获取到的收货地址， 存入到 本地存储\缓存中
+      // IV、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
     } 
     // 在catch中处理Promise((resolve,reject)=>{wx.getSetting({fail: (err) => {}});})
@@ -205,9 +206,10 @@ Page({
   async handleChooseAddress() {
     // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
     try {
+      // III、调用 获取收货地址的 api
       let address = await chooseAddressVar();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
-      // III、把获取到的收货地址， 存入到 本地存储\缓存中
+      // IV、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
     } 
     // 在catch中处理Promise((resolve,reject)=>{wx.getSetting({fail: (err) => {}});})
