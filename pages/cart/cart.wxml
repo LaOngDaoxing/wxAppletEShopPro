@@ -20,10 +20,7 @@
   <view class="cart_main">
     <!-- 当cart数组 长度不为0 显示 商品信息 -->
     <block wx:if="{{cart.length!==0}}">
-        <view class="cart_item"
-      wx:for="{{cart}}"
-      wx:key="goods_id"
-      >
+        <view class="cart_item" wx:for="{{cart}}" wx:key="goods_id">
           <!-- 复选框 -->
           <view class="cart_chk_wrap">
             <checkbox-group data-id="{{item.goods_id}}" bindchange="handeItemChange">
