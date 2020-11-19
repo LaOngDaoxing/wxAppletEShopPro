@@ -1,4 +1,4 @@
-import { promiseRequestVar } from "../../request/promiseRequest.js";
+import { promiseRequestVar } from "../../request/promiseRequest1.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
