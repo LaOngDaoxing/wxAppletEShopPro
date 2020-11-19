@@ -41,8 +41,9 @@
   （3） 获取本地存储\缓存中的购物车数组
   （4） 把购物车数据，设置给data中的一个变量（即填充到data中） 
 4 全选的实现 数据的展示
-  1 onShow 获取缓存中的购物车数组
-  2 根据购物车中的商品数据 所有的商品都被选中 checked=true  全选就被选中
+  （1） onShow() {中获取缓存中的购物车数组cart}
+  （2） 根据购物车数组cart中的属性，所有的商品都被选中 即checked=true
+    const allChecked=cart.length?cart.every(v=>v.checked):false;
 5 总价格和总数量
   1 都需要商品被选中 我们才拿它来计算
   2 获取购物车数组
@@ -74,7 +75,8 @@
     1 确定 直接执行删除
     2 取消  什么都不做 
   4 直接修改商品对象的数量 num
-  5 把cart数组 重新设置回 缓存中 和data中 this.setCart
+  5 把数组cart 重新设置回 缓存中 和data中 this.setCartFun(cart)
+三、底部工具栏  
 9 点击结算
   1 判断有没有收货地址信息
   2 判断用户有没有选购商品
@@ -84,10 +86,15 @@ import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToas
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
+    // 收货地址数据
     address: {},
+    // 添加到购物车的数据
     cart: [],
+    // 是否全选
     allChecked: false,
+    // 总价格
     totalPrice: 0,
+    // 总数量
     totalNum: 0
   },
   /**
@@ -101,8 +108,7 @@ Page({
     const cart = wx.getStorageSync("cart") || [];
     // 2、把数据 设置给data中的一个变量
     this.setData({ address });
-    this.setCart(cart);
-
+    this.setCartFun(cart);
   },
   /*--------------------------------------------- 一.1、获取收货地址，存入本地存储\缓存 开始---------------------------------------------*/
   /**
@@ -133,7 +139,7 @@ Page({
       complete: () => {}
     });
   },
-    /**
+  /**
    * @Description：点击 收货地址，正确完整流程演示
    * @CodeSteps：
       1 获取用户的收货地址
@@ -224,7 +230,7 @@ Page({
     }
   },
   /*--------------------------------------------- 一.1、获取收货地址，存入本地存储\缓存 结束---------------------------------------------*/
-  /*--------------------------------------------- 三、底部工具栏 开始---------------------------------------------*/
+  /*--------------------------------------------- 二、购物车内容 开始---------------------------------------------*/
   /**
    * @Description：商品的选中
    */
@@ -237,14 +243,15 @@ Page({
     let index = cart.findIndex(v => v.goods_id === goods_id);
     // 4 选中状态取反
     cart[index].checked = !cart[index].checked;
-
-    this.setCart(cart);
-
+    // 把数据 设置给data中的变量
+    this.setCartFun(cart);
   },
+  /*--------------------------------------------- 二、购物车内容 结束---------------------------------------------*/
+  /*--------------------------------------------- 三、底部工具栏 开始---------------------------------------------*/
   /**
-   * @Description：设置购物车状态同时 重新计算 底部工具栏的数据 全选 总价格 购买的数量
+   * @Description：设置购物车状态，同时重新计算底部工具栏的数据（全选 总价格 购买的数量） 
    */
-  setCart(cart) {
+  setCartFun(cart) {
     let allChecked = true;
     // 1 总价格 总数量
     let totalPrice = 0;
@@ -259,10 +266,12 @@ Page({
     })
     // 判断数组是否为空
     allChecked = cart.length != 0 ? allChecked : false;
+    // 把数据 设置给data中的变量
     this.setData({
       cart,
       totalPrice, totalNum, allChecked
     });
+    // 将加入购物车数据，放入本地存储\缓存中
     wx.setStorageSync("cart", cart);
   },
   /**
@@ -276,7 +285,7 @@ Page({
     // 3 循环修改cart数组 中的商品选中状态
     cart.forEach(v => v.checked = allChecked);
     // 4 把修改后的值 填充回data或者缓存中
-    this.setCart(cart);
+    this.setCartFun(cart);
   },
   /**
    * @Description：商品数量的编辑功能
@@ -294,13 +303,13 @@ Page({
       const res = await showModal({ content: "您是否要删除？" });
       if (res.confirm) {
         cart.splice(index, 1);
-        this.setCart(cart);
+        this.setCartFun(cart);
       }
     } else {
       // 4  进行修改数量
       cart[index].num += operation;
       // 5 设置回缓存和data中
-      this.setCart(cart);
+      this.setCartFun(cart);
     }
   },
   /**
