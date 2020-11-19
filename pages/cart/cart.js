@@ -81,11 +81,11 @@
   （5.2） 当购物车商品行编辑的数量为其他情况》
         直接修改商品对象的数量 num
         三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
-三、底部工具栏  
-9 点击结算
-  1 判断有没有收货地址信息
-  2 判断用户有没有选购商品
-  3 经过以上的验证 跳转到 支付页面！ 
+三.7、购物车页面的底部工具栏》点击“结算”按钮
+  （1） 获取 data中数据
+  （2） 判断有没有收货地址信息
+  （3） 判断用户有没有选购商品
+  （4） 经过以上的验证 跳转到 支付页面！ 
  */
 import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -345,24 +345,24 @@ Page({
     }
   },
   /**
-   * @Description：点击 结算 
+   * @Description：三.7、购物车页面的底部工具栏》点击“结算”按钮
    */  
   async handlePay(){
-    // 1 判断收货地址
+    // （1） 获取 data中数据
     const {address,totalNum}=this.data;
+    // （2） 判断有没有收货地址信息
     if(!address.userName){
-      await showToast({title:"您还没有选择收货地址"});
+      await showToastVar({title:"您还没有选择收货地址"});
       return;
     }
-    // 2 判断用户有没有选购商品
+    // （3） 判断用户有没有选购商品
     if(totalNum===0){
-      await showToast({title:"您还没有选购商品"});
+      await showToastVar({title:"您还没有选购商品"});
       return ;
     }
-    // 3 跳转到 支付页面
+    // （4） 经过以上的验证 跳转到 支付页面！ 
     wx.navigateTo({
-      url: '/pages/pay/index'
+      url: '/pages/pay/pay'
     });
-      
   }
 })
