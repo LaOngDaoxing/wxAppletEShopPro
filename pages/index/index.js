@@ -1,6 +1,6 @@
 //重新初始化index.js：先清空index.js》再输入wx-page》选择下拉框提示的wx-page
 // 0 引入 用来发送请求的 方法 一定要把路径补全
-import { promiseRequestVar } from "../../request/promiseRequest.js";
+import { promiseRequestVar } from "../../request/promiseRequest1.js";
 Page({
   data: {
     // 二、轮播图数组
