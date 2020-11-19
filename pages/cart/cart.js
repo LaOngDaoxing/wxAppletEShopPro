@@ -52,21 +52,21 @@
       II、不推荐 
         根据购物车数组cart中的属性，所有的商品都被选中 即checked=true
         const allChecked=cart.length?cart.every(v=>v.checked):false;
-  （3） 判断购物车中商品行的选中状态，选中\未选中
+  （3） 判断购物车中商品行的选中状态，选中/未选中
   （4） 把计算后的价格和数量，设置给data中的变量
   （5） 将加入购物车数据，放入本地存储\缓存中
-三.4、商品的选中
-  （1） 页面复选框，绑定change事件
+三.4、购物车页面的商品行复选框，选中/取消选中
+  （1） 购物车页面的商品行复选框，绑定change事件
   （2） 获取被修改的商品对象的id
   （3） 根据商品对象的id，找到被修改的商品对象
   （4） 商品对象的选中状态 取反
    三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
-7 全选和反选
-  1 全选复选框绑定事件 change
-  2 获取 data中的全选变量 allChecked
-  3 直接取反 allChecked=!allChecked
-  4 遍历购物车数组 让里面 商品 选中状态跟随  allChecked 改变而改变
-  5 把购物车数组 和 allChecked 重新设置回data 把购物车重新设置回 缓存中 
+三.5、购物车页面的全选复选框，全选/反选
+  （1） 购物车页面的全选复选框，绑定change事件
+  （2） 获取 data中数据，购物车数组cart、全选变量allChecked
+  （3） 修改值（直接取反 allChecked=!allChecked）
+  （4） 遍历修改购物车数组cart中的，商品选中状态
+  三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量）    
 8 商品数量的编辑
   1 "+" "-" 按钮 绑定同一个点击事件 区分的关键 自定义属性 
     1 “+” "+1"
@@ -257,7 +257,7 @@ Page({
     if(cart!=null || cart.length != 0){
       // （2） 遍历购物车数组cart
       cart.forEach(v => {
-        // （3） 判断购物车中商品行的选中状态，选中\未选中
+        // （3） 判断购物车中商品行的选中状态，选中/未选中
         // 选中
         if (v.checked) {
           // 合计金额 += 商品的单价 * 商品的数量
@@ -284,7 +284,7 @@ Page({
     wx.setStorageSync("cart", cart);
   },
   /**
-   * @Description：三.4、商品的选中
+   * @Description：三.4、购物车页面的商品行复选框，选中/取消选中
    */
   handeItemChange(e) {
     // （2） 获取被修改的商品id
@@ -299,16 +299,17 @@ Page({
     this.setCartCheckedAndFootertoolShowFun(cart);
   },
   /**
-   * @Description：商品全选功能
+   * @Description：三.5、购物车页面的全选复选框，全选/反选
+
    */
   handleItemAllCheck() {
-    // 1 获取data中的数据
+    // （2） 获取 data中数据，购物车数组cart、全选变量allChecked
     let { cart, allChecked } = this.data;
-    // 2 修改值
+    // （3） 修改值（直接取反 allChecked=!allChecked）
     allChecked = !allChecked;
-    // 3 循环修改cart数组 中的商品选中状态
+    // （4） 遍历修改购物车数组cart中的，商品选中状态
     cart.forEach(v => v.checked = allChecked);
-    // 4 把修改后的值 填充回data或者缓存中
+    // 三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
     this.setCartCheckedAndFootertoolShowFun(cart);
   },
   /**  
