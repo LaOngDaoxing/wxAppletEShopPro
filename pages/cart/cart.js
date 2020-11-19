@@ -67,18 +67,20 @@
   （3） 修改值（直接取反 allChecked=!allChecked）
   （4） 遍历修改购物车数组cart中的，商品选中状态
   三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量）    
-8 商品数量的编辑
-  1 "+" "-" 按钮 绑定同一个点击事件 区分的关键 自定义属性 
-    1 “+” "+1"
-    2 "-" "-1"
-  2 传递被点击的商品id goods_id
-  3 获取data中的购物车数组 来获取需要被修改的商品对象
-  4 当 购物车的数量 =1 同时 用户 点击 "-"
-    弹窗提示(showModal) 询问用户 是否要删除
-    1 确定 直接执行删除
-    2 取消  什么都不做 
-  4 直接修改商品对象的数量 num
-  5 把数组cart 重新设置回 缓存中 和data中 this.setCartCheckedAndFootertoolShowFun(cart)
+三.6、编辑购物车页面的商品行数量
+  （1） "+" "-" 按钮，绑定同一个点击事件；而区分的关键是自定义属性data-operation 
+        I、 “+”，使用data-operation="{{1}}"来实现"+1"
+        II、"-"，使用data-operation="{{-1}}"来实现"-1"
+  （2） 获取被点击的商品id
+  （3） 获取 data中数据，购物车数组cart
+  （4） 根据被点击的商品id，找到需要修改的商品对象的索引index
+  （5.1） 当购物车商品行编辑的数量=1，同时用户点击按钮"-"》弹窗提示(showModal) 询问用户"您是否要删除？"》判断是否要执行删除》
+        I、 确定 直接执行删除
+            三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
+        II、取消  什么都不做 
+  （5.2） 当购物车商品行编辑的数量为其他情况》
+        直接修改商品对象的数量 num
+        三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
 三、底部工具栏  
 9 点击结算
   1 判断有没有收货地址信息
@@ -313,27 +315,32 @@ Page({
     this.setCartCheckedAndFootertoolShowFun(cart);
   },
   /**  
-   * @Description：商品数量的编辑功能
+   * @Description：三.6、编辑购物车页面的商品行数量
    */  
   async handleItemNumEdit(e) {
-    // 1 获取传递过来的参数 
+    // （2） 获取被点击的商品id
     const { operation, id } = e.currentTarget.dataset;
-    // 2 获取购物车数组
+    // （3） 获取 data中数据，购物车数组cart
     let { cart } = this.data;
-    // 3 找到需要修改的商品的索引
+    // （4） 根据被点击的商品id，找到需要修改的商品对象的索引index
     const index = cart.findIndex(v => v.goods_id === id);
-    // 4 判断是否要执行删除
+    // （5.1） 当购物车的数量=1，同时用户点击按钮"-"》
     if (cart[index].num === 1 && operation === -1) {
-      // 4.1 弹窗提示
-      const res = await showModal({ content: "您是否要删除？" });
+      // 弹窗提示(showModal) 询问用户"您是否要删除？"》
+      const res = await showModalVar({ content: "您是否要删除？" });
+      // 判断是否要执行删除》
       if (res.confirm) {
+        // I、 确定 直接执行删除
         cart.splice(index, 1);
+        // 三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
         this.setCartCheckedAndFootertoolShowFun(cart);
       }
-    } else {
-      // 4  进行修改数量
+    } 
+    // （5.2） 当购物车商品行编辑的数量为其他情况》
+    else {
+      // 直接修改商品对象的数量 num
       cart[index].num += operation;
-      // 5 设置回缓存和data中
+      // 三.3、设置购物车中商品行的选中状态，同时重新设置底部工具栏的显示数据（是否全选、合计金额、结算总数量） 
       this.setCartCheckedAndFootertoolShowFun(cart);
     }
   },
