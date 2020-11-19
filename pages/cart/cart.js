@@ -79,7 +79,7 @@
   2 判断用户有没有选购商品
   3 经过以上的验证 跳转到 支付页面！ 
  */
-import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../static/document/utils/promiseRequestAsyncWx.js";
+import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
