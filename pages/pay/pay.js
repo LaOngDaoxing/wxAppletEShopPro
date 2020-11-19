@@ -18,16 +18,23 @@
   7 删除后的购物车数据 填充回缓存
   8 再跳转页面 
  */
-import {showToastVar} from "../../request/promiseRequestAsyncWx.js";
 import {promiseRequestVar} from "../../request/promiseRequest1.js";
+import {showToastVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
+    // 收货地址数据
     address: {},
+    // 添加到购物车的数据
     cart: [],
+    // 总价格
     totalPrice: 0,
+    // 总数量
     totalNum: 0
   },
+  /**
+   * @Remark：判断选择使用onLoad  onShow ；由于购物车页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
+   */  
   onShow() {
     // 1 获取缓存中的收货地址信息
     const address = wx.getStorageSync("address");
@@ -35,28 +42,34 @@ Page({
     let cart = wx.getStorageSync("cart") || [];
     // 过滤后的购物车数组
     cart = cart.filter(v => v.checked);
+    // 把数据 设置给data中的变量
     this.setData({ address });
 
-    // 1 总价格 总数量
+    // 总价格 
     let totalPrice = 0;
+    // 总数量
     let totalNum = 0;
+    // 遍历购物车数组cart
     cart.forEach(v => {
       totalPrice += v.num * v.goods_price;
       totalNum += v.num;
     })
+    // 把数据 设置给data中的变量
     this.setData({
       cart,
       totalPrice, totalNum,
       address
     });
   },
-  // 点击 支付 
+  // 
+  /**
+   * @Description：点击“支付”按钮
+   */
   async handleOrderPay() {
     try {
-
-      // 1 判断缓存中有没有token 
+      // 1 获取本地存储\缓存中的数据，token
       const token = wx.getStorageSync("token");
-      // 2 判断
+      // 2 判断本地存储\缓存中，有没有token
       if (!token) {
         wx.navigateTo({
           url: '/pages/auth/auth'
