@@ -24,7 +24,7 @@
 
       2、Promise.resolve(value)方法返回一个以给定值解析后的Promise对象，从而控制异步流程。
  */
-export const getSettingBv925Var=()=>{
+export const getSettingVar=()=>{
   // 实例化对象new Promise，返回是一个对象，不是一个函数。
   return new Promise((resolve,reject)=>{
     // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
@@ -47,7 +47,7 @@ export const getSettingBv925Var=()=>{
     2、微信官方9.25及之后版接口授权修改 
         Promise是异步请求；官方要求只能用button点击事件或点击行为同步触发，wx.openSetting。
  */
-export const openSettingBv925Var=()=>{
+export const openSettingVar=()=>{
   return new Promise((resolve,reject)=>{
     // 调起客户端小程序设置界面，返回用户设置的操作结果。设置界面只会出现小程序已经向用户请求过的权限。
     wx.openSetting({
@@ -67,7 +67,7 @@ export const openSettingBv925Var=()=>{
  * @Grammer规则：
       使用请求Promise((resolve,reject)=>{wx.chooseAddress({});})
  */
-export const chooseAddressBv925Var=()=>{
+export const chooseAddressVar=()=>{
   return new Promise((resolve,reject)=>{
     // 获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
     wx.chooseAddress({
@@ -86,7 +86,7 @@ export const chooseAddressBv925Var=()=>{
  *  promise 形式  showModal
  * @param {object} param0 参数
  */
-export const showModalBv925Var=({content})=>{
+export const showModalVar=({content})=>{
   return new Promise((resolve,reject)=>{
     wx.showModal({
       title: '提示',
@@ -106,7 +106,7 @@ export const showModalBv925Var=({content})=>{
  *  promise 形式  showToast
  * @param {object} param0 参数
  */
-export const showToastBv925Var=({title})=>{
+export const showToastVar=({title})=>{
   return new Promise((resolve,reject)=>{
     wx.showToast({
       title: title,
@@ -124,7 +124,7 @@ export const showToastBv925Var=({title})=>{
 /**
  * promise 形式  login
  */
-export const loginBv925Var=()=>{
+export const loginVar=()=>{
   return new Promise((resolve,reject)=>{
     wx.login({
       timeout:10000,
@@ -142,7 +142,7 @@ export const loginBv925Var=()=>{
  * promise 形式的 小程序的微信支付
  * @param {object} pay 支付所必要的参数
  */
-export const requestPaymentBv925Var=(pay)=>{
+export const requestPaymentVar=(pay)=>{
   return new Promise((resolve,reject)=>{
    wx.requestPayment({
       ...pay,

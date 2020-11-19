@@ -78,8 +78,7 @@
   2 判断用户有没有选购商品
   3 经过以上的验证 跳转到 支付页面！ 
  */
-import { getSettingBv925Var, chooseAddressBv925Var, openSettingBv925Var, showModalBv925Var ,showToastBv925Var} from "../../static/document/utils/asyncWxBv925.js";
-import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../static/document/utils/asyncWxAv925.js";
+import { getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../static/document/utils/asyncWxBv925.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
@@ -176,17 +175,17 @@ Page({
     // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
     try {
       // I、获取 权限状态
-      const res1 = await getSettingBv925Var();
+      const res1 = await getSettingVar();
       // 只要发现存在怪异属性名（如scope.address），都要使用[]形式获取属性值。
       const scopeAddress = res1.authSetting["scope.address"];
       console.log(scopeAddress);
       // II、判断 权限状态
       if (scopeAddress === false) {
         // 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给与 获取地址权限的时候 
-        await openSettingBv925Var();
+        await openSettingVar();
       }
       // 调用获取收货地址的 api
-      let address = await chooseAddressBv925Var();
+      let address = await chooseAddressVar();
       address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
       // III、把获取到的收货地址， 存入到 本地存储\缓存中
       wx.setStorageSync("address", address);
