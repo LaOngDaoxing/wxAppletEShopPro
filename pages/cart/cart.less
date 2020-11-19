@@ -101,12 +101,16 @@ page{
             }
   
             .cart_num_tool {
+              // 伸缩盒子
               display: flex;
               .num_edit {
                 width: 55rpx;
                 height: 55rpx;
+                // 伸缩盒子
                 display: flex;
+                // 水平居中
                 justify-content: center;
+                // 垂直居中
                 align-items: center;
                 border: 1rpx solid #ccc;
               }
@@ -114,8 +118,11 @@ page{
               .goods_num {
                 width: 55rpx;
                 height: 55rpx;
+                // 伸缩盒子
                 display: flex;
+                // 水平居中
                 justify-content: center;
+                // 垂直居中
                 align-items: center;
               }
             }
@@ -137,19 +144,25 @@ page{
     // 伸缩盒子
     display: flex;
     border-top: 1rpx solid #ccc;
+    /*----------- 1、全选 -----------*/
     .all_chk_wrap {
       flex: 2;
+      // 伸缩盒子
       display: flex;
+      // 水平居中
       justify-content: center;
+      // 垂直居中
       align-items: center;
     }
-  
+    /*----------- 2、总价格 -----------*/  
     .total_price_wrap {
       flex: 5;
       padding-right: 15rpx;
+      // 文字右对齐
       text-align: right;
       .total_price {
         .total_price_text {
+          // 主题颜色
           color: var(--themeColor);
           font-size: 34rpx;
           font-weight: 600;
@@ -157,15 +170,22 @@ page{
       }
   
     }
-  
+    /*----------- 3、结算 -----------*/  
     .order_pay_wrap {
       flex: 3;
+      // 背景颜色
       background-color: var(--themeColor);
+      // 字体颜色
       color: #fff;
+      // 字体大小
       font-size: 32rpx;
+      // 加粗
       font-weight: 600;
+      // 伸缩盒子
       display: flex;
+      // 文字水平居中
       justify-content: center;
+      // 文字垂直居中
       align-items: center;
     }
   }

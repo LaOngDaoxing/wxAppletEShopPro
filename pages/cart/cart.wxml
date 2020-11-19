@@ -53,20 +53,20 @@
 
 <!-- 三、底部工具栏 -->
 <view class="footer_tool">
-  <!-- 全选 -->
+  <!-- 1、全选 -->
   <view class="all_chk_wrap">
     <checkbox-group bindchange="handleItemAllCheck">
       <checkbox checked="{{allChecked}}">全选</checkbox>
     </checkbox-group>
   </view>
-  <!-- 总价格 -->
+  <!-- 2、总价格 -->
   <view class="total_price_wrap">
     <view class="total_price">
       合计: <text class="total_price_text">￥{{totalPrice}}</text>
     </view>
     <view>包含运费</view>
   </view>
-  <!-- 结算 -->
+  <!-- 3、结算 -->
   <view class="order_pay_wrap" bindtap="handlePay" >
     结算({{totalNum}})
   </view>
