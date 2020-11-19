@@ -45,6 +45,7 @@
           </view>
         </view>
     </block>
+    <!-- 当购物车数组cart，长度为0（即购物车中没有商品），显示的提示图片信息。 -->
     <block wx:else>
       <image mode="widthFix" src="http://hbimg.b0.upaiyun.com/e1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" ></image>
     </block>
