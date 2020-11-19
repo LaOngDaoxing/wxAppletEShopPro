@@ -2,6 +2,12 @@
  * @Description：一、获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
  * @Reference：
       1、微信官方9.25之前版接口授权
+      2、微信官方9.25及之后版接口授权修改
+        接口名称               功能说明             对应授权
+        wx.chooseAddress      获取用户收货地址      scope.address
+        wx.chooselnvoiceTitle 选择用户的发票抬头    scope.invoiceTitle
+        wx.chooselnvoice      选择用户已有的发票    scope.invoice
+        若开发者调用wx.getSetting接口请求用户的授权状态，会直接读取到以上3个授权为true      
  * @Grammer规则：
       1、使用构造函数实例化对象var pVar=new Promise((resolve,reject)=>{wx.getSetting({});})，实现异步请求。
           @Param：excutor(resolve,reject) 单元函数
@@ -36,6 +42,10 @@ export const getSettingBv925Var=()=>{
 }
 /**
  * @Description：二、调起客户端小程序设置界面，返回用户设置的操作结果。设置界面只会出现小程序已经向用户请求过的权限。
+ * @Reference：
+    1、微信官方9.25之前版接口授权
+    2、微信官方9.25及之后版接口授权修改 
+        Promise是异步请求；官方要求只能用button点击事件或点击行为同步触发，wx.openSetting。
  */
 export const openSettingBv925Var=()=>{
   return new Promise((resolve,reject)=>{
