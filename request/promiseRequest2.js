@@ -1,8 +1,14 @@
 // 同时发送异步请求的次数，用于实现全局正在“加载中”效果
 let ajaxTimes=0;
 export const promiseRequestVar2=(params)=>{
-  // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
+   /**
+   * // header将只有header["Authorization"]
+   * let header={};
+   * // header将除了header["Authorization"]，还可以有其他请求头信息
+   * let header={...params.header};
+    */ 
   let header={...params.header};
+  // 判断 url中是否带有 /my/ 请求的是私有的路径 带上header token
   if(params.url.includes("/my/")){
     // 拼接请求头header中，带上token
     header["Authorization"]=wx.getStorageSync("token");

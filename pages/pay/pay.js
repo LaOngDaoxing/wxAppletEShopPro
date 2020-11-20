@@ -49,8 +49,6 @@ Page({
     let cart = wx.getStorageSync("cart") || [];
     // 过滤购物车数组cart：此处cart中，仅保留已选中的商品
     cart = cart.filter(v => v.checked);
-    // 把数据 设置给data中的变量
-    this.setData({ address });
 
     // 总价格 
     let totalPrice = 0;
@@ -98,9 +96,9 @@ Page({
         goods_price: v.goods_price
       }))
       const orderParams = { order_price, consignee_addr, goods };
-      // 4 准备发送请求 创建订单 获取订单编号
+      // 4 调用后端创建订单接口，返回订单编号
       const { order_number } = await promiseRequestVar({ url: "/my/orders/create", method: "POST", data: orderParams });
-      // 5 发起 预支付接口，请求参数对象pay
+      // 5 调用后端预支付接口，返回对象pay
       const { pay } = await promiseRequestVar({ url: "/my/orders/req_unifiedorder", method: "POST", data: { order_number } });
       // 6 发起微信支付 
       await requestPayment(pay);
