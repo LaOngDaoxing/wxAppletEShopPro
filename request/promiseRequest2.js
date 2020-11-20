@@ -28,7 +28,7 @@ export const promiseRequestVar2=(params)=>{
   const baseUrl="https://api-hmugo-web.itheima.net/api/public/v1";
   return new Promise((resolve,reject)=>{
     wx.request({
-      // 请求参数对象params
+      // 请求参数对象params、header
       ...params,
       header:header,
       url:baseUrl+params.url,
