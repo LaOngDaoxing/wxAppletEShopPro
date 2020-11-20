@@ -36,9 +36,9 @@ Page({
    * @Remark：判断选择使用onLoad  onShow ；由于购物车页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
    */  
   onShow() {
-    // 1 获取缓存中的收货地址信息
+    // 1 获取本地存储\缓存中的收货地址信息
     const address = wx.getStorageSync("address");
-    // 1 获取缓存中的购物车数据
+    // 1 获取本地存储\缓存中的购物车数据
     let cart = wx.getStorageSync("cart") || [];
     // 过滤后的购物车数组
     cart = cart.filter(v => v.checked);
@@ -54,7 +54,7 @@ Page({
       totalPrice += v.num * v.goods_price;
       totalNum += v.num;
     })
-    // 把数据 设置给data中的变量
+    // 把计算后的价格和数量，设置给data中的变量
     this.setData({
       cart,
       totalPrice, totalNum,
@@ -66,6 +66,7 @@ Page({
    * @Description：点击“支付”按钮
    */
   async handleOrderPay() {
+    // 在try中处理Promise((resolve,reject)=>{wx.getSetting({success: (result) => {}});})
     try {
       // 1 获取本地存储\缓存中的数据，token
       const token = wx.getStorageSync("token");
@@ -108,13 +109,11 @@ Page({
       wx.navigateTo({
         url: '/pages/order/order'
       });
-        
-    } catch (error) {
+    } 
+    // 在catch中处理Promise((resolve,reject)=>{wx.getSetting({fail: (err) => {}});})
+    catch (error) {
       await showToastVar({ title: "支付失败" })
       console.log(error);
     }
   }
 })
-
-
-
