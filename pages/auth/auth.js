@@ -1,5 +1,5 @@
 import {promiseRequestVar} from "../../request/promiseRequest1.js";
-import {getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../request/promiseRequestAsyncWx.js";
+import {loginVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   /**
