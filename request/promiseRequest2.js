@@ -22,23 +22,24 @@ export const promiseRequestVar2=(params)=>{
   const baseUrl="https://api-hmugo-web.itheima.net/api/public/v1";
   return new Promise((resolve,reject)=>{
     wx.request({
-     ...params,
-     header:header,
-     url:baseUrl+params.url,
-     success:(result)=>{
-       resolve(result.data.message);
-     },
-     fail:(err)=>{
-       reject(err);
-     },
-     complete:()=>{
-      ajaxTimes--;
-      // promiseRequest.js应在最后一个请求返回响应后，再关闭提示框“加载中”；
-      if(ajaxTimes===0){
-        //  关闭正在等待的图标
-        wx.hideLoading();
+      // 请求参数对象params
+      ...params,
+      header:header,
+      url:baseUrl+params.url,
+      success:(result)=>{
+        resolve(result.data.message);
+      },
+      fail:(err)=>{
+        reject(err);
+      },
+      complete:()=>{
+        ajaxTimes--;
+        // promiseRequest.js应在最后一个请求返回响应后，再关闭提示框“加载中”；
+        if(ajaxTimes===0){
+          //  关闭正在等待的图标
+          wx.hideLoading();
+        }
       }
-     }
     });
   })
 }

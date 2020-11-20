@@ -1,4 +1,4 @@
-import {promiseRequestVar} from "../../request/promiseRequest1.js";
+import {promiseRequestVar2} from "../../request/promiseRequest2.js";
 import {loginVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
@@ -10,10 +10,10 @@ Page({
       // 1 获取用户信息
       const { encryptedData, rawData, iv, signature } = e.detail;
       // 2 获取小程序登录成功后的code
-      const { code } = await login();
+      const { code } = await loginVar();
       const loginParams={ encryptedData, rawData, iv, signature ,code};
       // 3 发送请求 获取用户的token
-      const {token}=await request({url:"/users/wxlogin",data:loginParams,method:"post"});
+      const {token}=await promiseRequestVar2({url:"/users/wxlogin",data:loginParams,method:"post"});
       // 4 把token存入缓存中 同时跳转回上一个页面
       wx.setStorageSync("token", token);
       wx.navigateBack({

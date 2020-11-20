@@ -145,13 +145,14 @@ export const loginVar=()=>{
 export const requestPaymentVar=(pay)=>{
   return new Promise((resolve,reject)=>{
    wx.requestPayment({
-      ...pay,
-     success: (result) => {
-      resolve(result)
-     },
-     fail: (err) => {
-       reject(err);
-     }
+      // 请求参数对象pay
+        ...pay,
+      success: (result) => {
+        resolve(result)
+      },
+      fail: (err) => {
+        reject(err);
+      }
    });
   })
 }
