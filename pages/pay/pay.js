@@ -36,18 +36,18 @@ Page({
    * @Remark：判断选择使用onLoad  onShow ；由于商品支付页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
    */  
   onShow() {
-    // 获取本地存储\缓存中信息，并在商品支付页面显示数据
+    // 获取本地存储\缓存中信息，并在商品支付页面，初始化显示数据
     this.initPayPageShowFun();
   },
   /**
-   * @Description： 获取本地存储\缓存中信息，并在商品支付页面显示数据
+   * @Description： 获取本地存储\缓存中信息，并在商品支付页面，初始化显示数据
    */
   initPayPageShowFun(){
     // 1 获取本地存储\缓存中的收货地址信息
     const address = wx.getStorageSync("address");
     // 1 获取本地存储\缓存中的购物车数据
     let cart = wx.getStorageSync("cart") || [];
-    // 过滤购物车数组cart：cart中，仅保留已选中的商品
+    // 过滤购物车数组cart：此处cart中，仅保留已选中的商品
     cart = cart.filter(v => v.checked);
     // 把数据 设置给data中的变量
     this.setData({ address });
@@ -89,6 +89,7 @@ Page({
       // 3.2 准备 请求体参数
       const order_price = this.data.totalPrice;
       const consignee_addr = this.data.address.all;
+      // 由于在initPayPageShowFun(){中已过滤购物车数组cart：此处cart中，仅保留已选中的商品}
       const cart = this.data.cart;
       let goods = [];
       cart.forEach(v => goods.push({
@@ -106,9 +107,9 @@ Page({
       // 7 查询后台 订单状态
       const res = await promiseRequestVar({ url: "/my/orders/chkOrder", method: "POST", data: { order_number } });
       await showToastVar({ title: "支付成功" });
-      // 8 手动删除缓存中 已经支付了的商品（注意本项目代码，仅仅是操作缓存中数据；实际开发应修改后台数据）
+      // 8 此处获取到的本地存储\缓存中，购物车数组newCart，是购物车中全部商品。
       let newCart=wx.getStorageSync("cart");
-      // 过滤购物车数组newCart：newCart中，仅保留未结算（结算时未选中）的商品
+      // 过滤购物车数组newCart：newCart中，仅保留未结算（结算时未选中）的商品。（注意本项目此处过滤代码，仅仅是手动操作，删除本地存储\缓存中数据；实际开发应修改后台数据）
       newCart=newCart.filter(v=>!v.checked);
       wx.setStorageSync("cart", newCart);
         
