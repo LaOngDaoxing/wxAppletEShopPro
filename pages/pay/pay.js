@@ -33,16 +33,16 @@ Page({
     totalNum: 0
   },
   /**
-   * @Remark：判断选择使用onLoad  onShow ；由于购物车页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
+   * @Remark：判断选择使用onLoad  onShow ；由于商品支付页面被频繁的打开、隐藏，期望购物车页面每次被打开都做初始化，因此选择使用onShow。
    */  
   onShow() {
-    // 初始化购物车界面显示
-    this.initCartPageShowFun();
+    // 获取本地存储\缓存中信息，并在商品支付页面显示数据
+    this.initPayPageShowFun();
   },
   /**
-   * @Description：初始化购物车界面显示
+   * @Description： 获取本地存储\缓存中信息，并在商品支付页面显示数据
    */
-  initCartPageShowFun(){
+  initPayPageShowFun(){
     // 1 获取本地存储\缓存中的收货地址信息
     const address = wx.getStorageSync("address");
     // 1 获取本地存储\缓存中的购物车数据
