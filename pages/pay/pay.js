@@ -19,7 +19,7 @@
   8 再跳转页面 
  */
 import {promiseRequestVar} from "../../request/promiseRequest1.js";
-import {getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar} from "../../request/promiseRequestAsyncWx.js";
+import {getSettingVar, chooseAddressVar, openSettingVar, showModalVar ,showToastVar,requestPaymentVar} from "../../request/promiseRequestAsyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
